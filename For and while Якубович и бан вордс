@@ -1,0 +1,76 @@
+#n=1
+#while n<10:
+ #   n+=1
+ #   print("Hello world")
+    
+    
+#userInput = input("Sisesta sõna")
+#banword= "Privet"
+
+#count = 0
+
+
+
+
+#for i in range(0,len(banword)):
+ #   print("text täht;",banword[i])
+ #   print("kasutaja täht:",userInput[i],"keelatud täht",banword[i])
+ #   if userInput[i] == banword [i]:
+  #      print("täht on sama")
+  #      count += 1
+  #  else:
+   #      print("võrsed tähed")
+ #        break
+#if count == len(banword):
+   # print("halb sõna")
+#else:
+ #   print("SÕNA SOBIB")
+    
+
+
+
+
+
+
+#sõna =["auto","kass","kauplus","puu","jook","laptop"]
+#print(sõna[len(sõna)-1])
+#secret="auto"
+#print(secret)
+#gues = ""
+
+
+
+#user= input("Sisesta täht:")
+#num = 0
+
+#for i in range(0,len(secret)):
+ #   gues += "_ "
+  #  if secret[i] == user:
+   #     print("see täht:",user,"on meis sõnas")
+    #    num=i
+#gues=gues.split(' ')
+#gues[num] = user
+#print(gues)
+
+   
+secret = "auto"
+attempts = 5
+gues = ["_"] * len(secret)
+
+while attempts > 0 and "_" in gues:
+    print(" ".join(gues))
+    user = input("Sisesta täht: ")
+
+    if user in secret:
+        print("Õige!")
+        for i in range(len(secret)):
+            if secret[i] == user:
+                gues[i] = user
+    else:
+        attempts -= 1
+        print("Vale! Katseid jäänud:", attempts)
+
+if "_" not in gues:
+    print("Võit! Sõna oli:", secret)
+else:
+    print("Kaotus! Sõna oli:", secret)
