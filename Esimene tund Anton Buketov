@@ -1,0 +1,36 @@
+print  (1+1)
+print("1"+"1")
+
+#andme tüübid
+#"hello World" str
+#1 int
+#1.5 float
+
+#muutujad
+nimi="Anton"
+perekonnanimi = "Buketov"
+print(nimi+""+perekonnanimi)
+
+#luua muutujad film,aasta,rezisöör,näitlejal ja näitleja 2
+#tulemus film matrix ilmus aastal 1999,rezisöör on wachowski,
+#ning peanäiteljad on Keanu Reeves ja Laurence fishburne
+
+film_nimi="Spanjboob"
+aasta="1999"
+rezisöör="Nikolas Jakson"
+näitlejad="Kiril lol"
+näitlejad2="Mihail Buhantsev"
+
+
+
+print("film_nimi"":"+film_nimi+"aasta"+aasta+"rezisöör"+rezisöör+"näitlejad"+näitlejad+"naitlejad2"+näitlejad2)
+
+lemmikloom = input("siseta oma lemmikloom")
+print("Minu lemmikloom on "+lemmikloom)
+
+pikkus =input("siseta pikkus:")
+laius =input("siseta laius:")
+umbermot =2*(pikkus+laius)
+pindala=pikkus*laius
+print("ümbermööt:",umbermot)
+print("laius:")
