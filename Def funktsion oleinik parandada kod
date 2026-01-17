@@ -1,0 +1,115 @@
+from random import *
+import defmodule 
+    
+def vahetus(a,b): # siin vaja a,b ja vahetab kahe muutuja väärtused omavahel
+    abi=a
+    a=b
+    b=abi
+    return a,b
+
+def generaator(n,loend,a,b): #lisab loendisse n juhuslikku arvu vahemikust a kuni b
+    for i in range (n):#siin vaja sulk
+        loend.append(randint(a,b))#siin vaja tabulatsioon ja ei vaja sulk
+
+    
+
+def jagamine(loend:list,p:list,n,nol):#jagab loendi elemendid positiivseteks (p), negatiivseteks (n) ja nullideks
+    for el in loend:
+        if el>0:
+            p.append(el)
+        elif el<0: #siin vaja el<0:
+            n.append(el) #siin vaja .
+        else:
+            nol.append(el) #siin vaja .
+
+def keskmine(loend): #leiab loendi elementide keskmise.
+    n=len(loend)
+    if n==0:
+        kesk=0
+    else:
+        sum=0
+        for i in loend:
+            sum+=i
+        kesk=round(sum/n,2) #siin vaja tab tagasi
+    return kesk
+
+def lisamine(loend,el): #lisab elemendi loendisse ja sorteerib loendi.
+    loend.append(el) # siin vaja .
+    loend.sort() #siin vaja .
+
+
+
+
+    #Põhifunktsioon
+def arvud_loendis():
+    """Kirjandus Programm küsib kasutajalt, mitu täisarvu genereerida ja millises vahemikus.
+
+Kui miinimum on suurem kui maksimum, siis väärtused vahetatakse omavahel.
+
+Genereeritakse loend s juhuslikest arvudest.
+
+Loend sorteeritakse.
+
+Arvud jagatakse kolmeks loendiks:
+
+pos — positiivsed,
+
+neg — negatiivsed,
+
+null — nullid.
+
+Arvutatakse positiivsete ja negatiivsete arvude keskmised.
+
+Need keskmised lisatakse tagasi algsesse loendisse s.
+
+Lõpuks loend sorteeritakse ja väljastatakse ekraanile
+    """
+    print("Andmed:")
+    try:
+            n=abs(int(input("Mitu täisarvu genereerime loendisse? => ")))#tabulatsioon
+            mini=int(input("Sisesta vahemiku minimaalne arv => "))#tabulatsioon
+            maxi=int(input("Sisesta vahemiku maksimaalne arv => "))#tabulatsioon
+    except ValueError:
+           print("Palun sisesta korrektne täisarv")
+           return
+
+    if mini>=maxi:
+        mini,maxi =vahetus(mini,maxi)
+
+
+    s=[]#Alghe loend
+    pos=[]#positiivse 
+    neg=[]#Neitralne
+    null=[]#Nullide loend
+    generaator(n,s,mini,maxi)#tabulatsioon ja ei vaja :
+    print()
+    print("Tulemused:")
+    print("Saadud loend alates",mini,"kuni",maxi,s)
+    s.sort() #siin vaja s.sort
+    print("Sorteeritud loend",s)# siin vaja ,
+    jagamine(s,pos,neg,null)
+    print("Positiivsete elementide loend",pos)
+    print("Negatiivsete elementide loend",neg)
+    print("Null-elementide loend",null)
+    kesk=keskmine(pos)#siin ei vaja n ja :
+    lisamine(s,kesk)
+    print("Positiivsete keskmine:",kesk)
+    kesk=keskmine(neg)#siin ei vaja : ja n
+    lisamine(s,kesk)#siin ei vaja :
+    print("Negatiivsete keskmine:",kesk)
+    print("Lisame keskmised algsesse massiivi:")
+    s.sort() #siin vaja  s.sort
+    print(s)
+
+
+
+
+
+
+
+from defmodule import *
+
+
+#Põhifunktsiooni käivitus
+#parandatud lisatud prograamikäivatus
+arvud_loendis()
