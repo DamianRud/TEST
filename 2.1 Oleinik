@@ -1,0 +1,254 @@
+import datetime
+import random
+
+# =========================
+# Упражнение 2.1 — Условный оператор IF
+# =========================
+
+# -------------------------
+# Задача 1: Джуку
+# -------------------------
+print("Задача 1: Джуку")
+name = input("Введите имя => ").upper()  # приводим к верхнему регистру
+if name == "ДЖУКУ":
+    print("Пойдем в кино с Джуку!")
+
+    # билет по возрасту
+    age_input = input("Введите возраст Джуку => ")
+    if age_input.isdigit():
+        age = int(age_input)
+        if age < 0 or age > 100:
+            print("Ошибка: некорректный возраст")
+        elif age < 6:
+            print("Билет: бесплатно")
+        elif 6 <= age <= 14:
+            print("Билет: детский")
+        elif 15 <= age <= 65:
+            print("Билет: полный")
+        else:
+            print("Билет: со скидкой")
+    else:
+        print("Ошибка: возраст должен быть целым числом")
+
+print("\n")
+
+# -------------------------
+# Задача 2: Соседи по скамейке
+# -------------------------
+print("Задача 2: Соседи по скамейке")
+name1 = input("Введите имя первого человека => ")
+name2 = input("Введите имя второго человека => ")
+if name1.isalpha() and name2.isalpha():
+    neighbor = random.choice([True, False])
+    if neighbor:
+        print(name1 + " и " + name2 + " сегодня соседи по столику")
+    else:
+        print(name1 + " и " + name2 + " не соседи по столику")
+else:
+    print("Ошибка: имена должны содержать только буквы")
+
+print("\n")
+
+# -------------------------
+# Задача 3: Ремонт
+# -------------------------
+print("Задача 3: Ремонт")
+length = float(input("Введите длину стены комнаты (м) => "))
+width = float(input("Введите ширину комнаты (м) => "))
+floor_area = length * width
+print("Площадь пола: " + str(floor_area) + " м²")
+
+do_renovation = input("Хотите сделать ремонт? (да/нет) => ").lower()
+if do_renovation == "да":
+    cost_per_m2 = float(input("Сколько стоит 1 м²? => "))
+    total_cost = floor_area * cost_per_m2
+
+    help_choice = input("Сделаете ремонт сами или с профессионалом? (сам/профи) => ").lower()
+    if help_choice == "профи":
+        labor_cost = float(input("Введите стоимость работы профессионала => "))
+        total_cost += labor_cost
+
+    print("Общая стоимость ремонта: " + str(total_cost) + " евро")
+else:
+    print("Ремонт не выполняется")
+
+print("\n")
+
+# -------------------------
+# Задача 4: Скидка
+# -------------------------
+print("Задача 4: Скидка")
+price = float(input("Введите цену товара => "))
+if price > 700:
+    price_discount = price * 0.7
+    print("Цена со скидкой 30%: " + str(price_discount) + " евро")
+else:
+    print("Цена без скидки: " + str(price) + " евро")
+
+print("\n")
+
+# -------------------------
+# Задача 5: Температура
+# -------------------------
+print("Задача 5: Температура")
+temp = float(input("Введите температуру => "))
+if temp > 18:
+    print("Температура выше 18°C — рекомендованная комнатная температура зимой")
+else:
+    print("Температура ниже рекомендованной")
+
+print("\n")
+
+# -------------------------
+# Задача 6: Длина (рост)
+# -------------------------
+print("Задача 6: Длина человека")
+height = float(input("Введите рост в см => "))
+if height < 160:
+    print("Низкий рост")
+elif 160 <= height <= 180:
+    print("Средний рост")
+else:
+    print("Высокий рост")
+
+print("\n")
+
+# -------------------------
+# Задача 7: Рост и пол
+# -------------------------
+print("Задача 7: Рост и пол")
+gender = input("Введите пол (м/ж) => ").lower()
+if gender == "м":
+    height = float(input("Введите рост в см => "))
+    if height < 160:
+        print("Низкий мужчина")
+    elif 160 <= height <= 180:
+        print("Средний мужчина")
+    else:
+        print("Высокий мужчина")
+else:
+    print("Женщина — возраст не проверяется")
+    height = float(input("Введите рост в см => "))
+    if height < 150:
+        print("Низкая женщина")
+    elif 150 <= height <= 170:
+        print("Средняя женщина")
+    else:
+        print("Высокая женщина")
+
+print("\n")
+
+# -------------------------
+# Задача 8: В магазине
+# -------------------------
+print("Задача 8: В магазине")
+products = ["молоко", "выпечка", "хлеб"]
+cart = {}
+for p in products:
+    want = input("Хотите купить " + p + "? (да/нет) => ").lower()
+    if want == "да":
+        price = round(random.uniform(1, 5), 2)
+        qty = int(input("Сколько " + p + " хотите купить? => "))
+        cart[p] = (price, qty)
+
+# Вывод чека
+print("\nЧек:")
+total = 0
+for item, (price, qty) in cart.items():
+    cost = price * qty
+    total += cost
+    print(item + ": " + str(qty) + " x " + str(price) + " = " + str(round(cost, 2)) + " евро")
+print("Итого: " + str(round(total, 2)) + " евро")
+
+print("\n")
+
+# -------------------------
+# Задача 9: Квадраты
+# -------------------------
+print("Задача 9: Квадрат")
+side1 = float(input("Введите первую сторону => "))
+side2 = float(input("Введите вторую сторону => "))
+if side1 == side2:
+    print("Это квадрат")
+else:
+    print("Это не квадрат")
+
+print("\n")
+
+# -------------------------
+# Задача 10: Математика
+# -------------------------
+print("Задача 10: Математические операции")
+num1 = float(input("Введите первое число => "))
+num2 = float(input("Введите второе число => "))
+op = input("Выберите операцию (+, -, *, /) => ")
+
+if op == "+":
+    print("Результат: " + str(num1 + num2))
+elif op == "-":
+    print("Результат: " + str(num1 - num2))
+elif op == "*":
+    print("Результат: " + str(num1 * num2))
+elif op == "/":
+    if num2 != 0:
+        print("Результат: " + str(num1 / num2))
+    else:
+        print("Ошибка: деление на ноль")
+else:
+    print("Ошибка: неизвестная операция")
+
+print("\n")
+
+# -------------------------
+# Задача 11: Юбилей
+# -------------------------
+print("Задача 11: Юбилей")
+birth_date_input = input("Введите дату рождения (ГГГГ-ММ-ДД) => ")
+birth_date = datetime.datetime.strptime(birth_date_input, "%Y-%m-%d").date()
+today = datetime.date.today()
+if birth_date.day == today.day and birth_date.month == today.month:
+    print("Сегодня ваш юбилей!")
+else:
+    print("Сегодня не ваш юбилей")
+
+print("\n")
+
+# -------------------------
+# Задача 12: Продажи
+# -------------------------
+print("Задача 12: Продажи")
+price = float(input("Введите цену товара => "))
+if price <= 10:
+    final_price = price * 0.9
+else:
+    final_price = price * 0.8
+print("Окончательная цена: " + str(round(final_price, 2)) + " евро")
+
+print("\n")
+
+# -------------------------
+# Задача 13: Футбольная команда
+# -------------------------
+print("Задача 13: Футбольная команда")
+gender = input("Введите пол (м/ж) => ").lower()
+if gender == "м":
+    age = int(input("Введите возраст => "))
+    if 16 <= age <= 18:
+        print("Кандидат подходит для команды")
+    else:
+        print("Кандидат не подходит по возрасту")
+else:
+    print("Женщина — не подходит для команды")
+
+print("\n")
+
+# -------------------------
+# Задача 14: Автобусная логистика
+# -------------------------
+print("Задача 14: Автобусная логистика")
+passengers = int(input("Введите количество пассажиров => "))
+bus_capacity = 50
+buses_needed = passengers // bus_capacity
+if passengers % bus_capacity != 0:
+    buses_needed += 1
+print("Необходимо автобусов: " + str(buses_needed))
