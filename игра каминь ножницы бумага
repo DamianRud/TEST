@@ -1,0 +1,59 @@
+import random
+
+games_played = 0
+wins = 0
+losses = 0
+options = ["камень", "ножницы", "бумага"]
+
+while True:
+    print("---Добро пожаловать в игру---")
+    print("Выберите действие")
+    print("1.камень")
+    print("2.Ножницы")
+    print("3.Бумага")
+    print("4.Выход")
+
+    try:
+        user = input("Введи действие")
+        if user == "4":
+            print("Пока")
+            break
+
+        if user not in ["1", "2", "3"]:
+            print("Неверный выбор!")
+            continue
+
+        computer = random.choice(["1", "2", "3"])
+        games_played += 1
+
+        if user == "1" and computer == "1":
+            print("Ничья Камень на Камень")
+        elif user == "1" and computer == "2":
+            print("Человек победил камень выигрывает ножницы")
+            wins += 1
+        elif user == "1" and computer == "3":
+            print("Компьютер победил")
+            losses += 1
+
+        if user == "2" and computer == "2":
+            print("Ничья ножницы на ножницы")
+        elif user == "2" and computer == "1":
+            print("Компьютер победил Камень бьет ножницы")
+            losses += 1
+        elif user == "2" and computer == "3":
+            print("Человек победил ")
+            wins += 1
+
+        if user == "3" and computer == "3":
+            print("Ничья Бумага на Бумагу")
+        elif user == "3" and computer == "2":
+            print("Компьютер победил Ножницы режут бумагу")
+            losses += 1
+        elif user == "3" and computer == "1":
+            print("Человек победил")
+            wins += 1
+
+        print("Сыграно игр:", games_played, "Выиграно:", wins, "Проиграно:", losses)
+
+    except Exception as e:
+        print("Произошла ошибка:", e)
