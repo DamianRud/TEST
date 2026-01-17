@@ -30,7 +30,92 @@ print("Minu lemmikloom on "+lemmikloom)
 
 pikkus =input("siseta pikkus:")
 laius =input("siseta laius:")
-umbermot =2*(pikkus+laius)
-pindala=pikkus*laius
-print("ümbermööt:",umbermot)
-print("laius:")
+
+
+
+
+
+
+
+
+
+
+print  (1+1)
+print("1"+"1")
+
+#andme tüübid
+#"hello World" str
+#1 int
+#1.5 float
+
+#muutujad
+nimi="Anton"
+perekonnanimi = "Buketov"
+print(nimi+""+perekonnanimi)
+
+#luua muutujad film,aasta,rezisöör,näitlejal ja näitleja 2
+#tulemus film matrix ilmus aastal 1999,rezisöör on wachowski,
+#ning peanäiteljad on Keanu Reeves ja Laurence fishburne
+
+film_nimi="Spanjboob"
+aasta="1999"
+rezisöör="Nikolas Jakson"
+näitlejad="Kiril lol"
+näitlejad2="Mihail Buhantsev"
+
+
+
+print("film_nimi"":"+film_nimi+"aasta"+aasta+"rezisöör"+rezisöör+"näitlejad"+näitlejad+"naitlejad2"+näitlejad2)
+
+
+#str() -text-arv
+#int()-arv-text
+
+
+
+
+#lemmikloom = input("siseta oma lemmikloom")
+#print("Minu lemmikloom on "+lemmikloom)
+
+#pikkus = int(input("siseta pikkus:"))
+#laius = int(input("siseta laius:"))
+#umbermot = 2 *(pikkus+laius)
+#pindala=pikkus*laius
+#print("ümbermõõt:",umbermot)
+#print("laius:",laius)
+            
+#kirjuta programm ,mis küsib kasutajalt järgmised andmed.
+nimi
+vanus
+elukoht
+lemmikfilm
+lemmikmuusik
+kolm lemmiktoitu
+
+
+#1.salvesta iga sastus eraldi muutujasse
+#2.väljasta tervituseks, kus kasutatakse mini ja vanus
+#3.väljasta lause elukoha kohta
+#4.väljasta lause lemmikfilm kohta ja muusika kohta
+#5.väljasta kõik toidu ühes lauses. (minu lemmiktoidu on?,?,?.)
+
+
+mini = input("siseta oma nimi:")
+
+vanus = input("sisesta vanus")
+
+elukoht = str(input("sisesta elukoht"))
+
+lemmikfilm = input("sisesta oma lemmikfilm")
+
+lemmikmuusik =input("siseta oma lemmikmuusik ")
+
+kolm lemmiktoitu = input("siseta kolm lemmiktoitu"+kolm lemmiktoitu)
+
+print("minu mini on"+nimi+"ja minu vanus on"+vanus)
+ print("minu elukoht on"+elukoht )
+ print("minu lemmikfilm on"+lemmikfilm)
+ print("minu lemmikmusik on"lemmikmusik+)
+ print ("minu lemmiktoit")
+ 
+
