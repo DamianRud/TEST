@@ -1,0 +1,171 @@
+#userInput = int(input("sisesta arv:"))
+#i = 1
+#while i<= userInput:
+  #  print("Hello World","tsükil töötas nii palju korda",i)
+  #  i=i+1
+    
+#2.tagasilugemine N-st 1-ni
+
+
+
+#userInput = int(input("sisesta arv:"))
+#while userInput >= 1:
+ #   print("Hello World","tsükil töötas nii palju korda",userInput)
+ #   userInput = userInput -1
+
+
+#sum 1-st kuni N-ni
+
+#user =int(input("sisesta arv 1 kuni 5:"))
+#i = 1
+#numSum = 0
+#while i<= user:
+#    numSum = numSum + i
+ #   i = i +1
+#print("Sum:",numSum)
+
+
+#4. Paaris- ja paaritute numbrite arv.
+
+#user = int(input("Sisesta arv"))
+
+#munber = 0
+#print("Paaris arv")
+
+#i = 2
+#while i <= user:
+  # print(i)
+  # i +=2
+   
+   
+#print("paaritute")
+#i =1
+#while i<=user:
+  #  print(i)
+   # i +=2
+
+#break
+#user = int(input("Sisesta arv:"))
+#i=1
+#oddNumber = 0
+#evenNumber = 0
+#while i<= user:
+ #   if i %2==1:
+   #     print(i,"patiru arv")
+   #     oddNumber=oddNumber+1
+        #i=i+1
+   #continue
+  #  else:
+    #    print(i,"Paris arv")
+    #    evenNumber +=1
+   # i=i+1
+#print("paaritute arvude arv:",oddNumber,"paaris arvude arv:",evenNumber)
+
+
+
+
+
+
+
+
+
+#break
+#k=0
+#while k<10:
+  #  print("k: " ,k)
+   # k+=1
+   # if(k==3):
+     #   print("töötab break")
+      #  continue
+    
+
+
+
+
+#continue
+
+      
+#i = 1
+#while i <=100:
+   # if "3"  in str(i):
+    #    i += 1
+     #   continue
+   # else:
+     #   print(i)
+   # i +=1
+    
+
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ #continue
+
+#user = int(input("sisesta arv:"))
+#i=0
+#while i < user:
+#    if "3" in str(i):
+ #       i += 1
+  #      continue
+  #  print(i)
+   # i +=1
+    
+    
+  
+#gues number
+   
+
+#num=33
+#count = 3
+#while count != 0:
+  #  user = int(input("Sisesta arv:"))
+  #  if user < num and user > 0 and user <100:
+  #      print("Sa sisestasid vähem arv kui oli planeeritud")
+   #     count -= 1
+   # elif user == num and user >0 and user <100:
+   #    print("sa valisid õige arv")
+   #    break
+   # else:
+   #    print("Sa sisestasid surem arv kui oli planeeritud") 
+  #  count -= 1
+     
+#or
+#and
+
+
+
+#bankomat
+  
+  
+  
+password = "12345"
+raha = 500
+
+if input("parol:") == password:
+    while True:
+        print("Raha:",raha,"EUR")
+        print("1-välja võtta raha")
+        print("2-Sisse maksta")
+        print("3- välja")
+        
+        valik = input ==("Vali:")
+            
+        if valik == "1":
+            summa = int(input("kui palju võtta:"))
+            if summa <= raha:
+                raha = raha - summa
+                print("võtsid",summa,"eur")
+            else:
+                print("pole piisavalt raha!")
+                
+    elif vajalik == "2":
+        summa int(input("Kui palju panna:"))
+        raha = raha+summa
+            print("panid",summa,"eur")
+    
+    elif valik == "3":
+        print("Head aega")
+        break
