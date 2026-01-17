@@ -1,0 +1,146 @@
+import module
+palgad =[1000 ,1200 ,2500 ,800 ,750 ,1200,]
+inimesed =["A" ,"B" ,"C" ,"D" ,"E" ,"F",]
+
+
+
+while True:
+    print("palgad" ,palgad)
+    print("inimesed" ,inimesed)
+    print("Menüü")
+    print("1.Lisa andmed")
+    print("2.Kustuta andmed")
+    print("3.suurim_palk")
+    print("4.vaikseim_palk")
+    print("5.Keskmine palk")
+    print("6.Eemalda Alla Keskmise Palga Saajad")
+    print("7.redigeeri_andmeid")
+    print("8.Väljumine")
+
+    user =input("Sisesta tegevus")
+
+    if user=="1":
+        module.lisa_andmed()
+    elif user=="2":
+        module.kustuta_andmeid(inimesed ,palgad)
+    elif user=="3":
+        module.suurim_palk(inimesed ,palgad)
+    elif user=="4":
+        module.vaikseim_palk(inimesed ,palgad)
+    elif user=="5":
+        module.keskmine_palk(inimesed, palgad)
+    elif user=="6":
+        module.Eemalda_Alla_Keskmise(inimesed, palgad)
+    elif user=="7":
+        module.redigeeri_andmeid(inimesed,palgad)
+    elif user=="8":
+        print("Programm on lõpetatud")
+        break
+
+
+
+
+
+
+
+
+
+
+
+
+from random import *
+from string import *
+
+palgad = []
+inimesed = []
+
+
+def lisa_andmed():
+    kogus=int(input("sisesta: kui palju inimesi lisada "))
+    for inimese in range(kogus):
+        nimi=input("sisesta nimi töötaja")
+        palk=int(input("sisesta palk töötaja "))
+        print("Nimi",nimi,"Palk",palk)
+
+        inimesed.append(nimi)
+        palgad.append(palk)
+
+
+    print("Lisatud:", inimesed, palgad)
+
+
+def kustuta_andmeid(inimesed, palgad):
+    nimi = input("Sisesta nimi, keda kustutada:")
+    if nimi not in inimesed:
+        print("ei leitud")
+        return
+    i = 0
+    while i < len(inimesed):
+        if inimesed[i] == nimi:
+            inimesed.pop(i)
+            palgad.pop(i)
+        else:
+            i += 1
+
+
+def suurim_palk(inimesed, palgad):
+    max_palk = max(palgad)
+    print("Suurim palk:", max_palk)
+
+    for i in range(len(palgad)):
+        if palgad[i] == max_palk:
+            print("Saaja:", inimesed[i])
+
+
+
+def vaikseim_palk(inimesed, palgad):
+    min_palk = min(palgad)
+    print("Väikseim palk:", min_palk)
+
+    for i in range(len(palgad)):
+        if palgad[i] == min_palk:
+            print("Saaja:", inimesed[i])
+
+
+
+def keskmine_palk(inimesed, palgad):
+    keskmine = sum(palgad) / len(palgad)
+    print("Keskmine palk:", keskmine)
+
+    for i in range(len(palgad)):
+        if palgad[i] == keskmine:
+            print("Saaja:", inimesed[i])
+
+
+
+def Eemalda_Alla_Keskmise(inimesed, palgad):
+    nim_vaiksem=sum(palgad) / len(palgad)
+    print("Keskmise palk:", nim_vaiksem)
+
+    i = 0
+    while i < len(palgad):
+        if palgad[i] < nim_vaiksem:
+            inimesed.pop(i)
+            palgad.pop(i)
+        else:
+            i += 1
+
+    print("Jäänud inimesed:", inimesed)
+    print("Jäänud palgad:", palgad)
+
+
+
+
+def redigeeri_andmeid(inimesed, palgad):
+    nimi = input("Sisesta inimese nimi: ")
+    index = inimesed.index(nimi)
+
+    valik = input("Mida muuta? (nimi/palk): ")
+
+    if valik == "nimi":
+        uus_nimi = input("Sisesta uus nimi: ")
+        inimesed[index] = uus_nimi
+
+    elif valik == "palk":
+        uus_palk = int(input("Sisesta uus palk: "))
+        palgad[index] = uus_palk
