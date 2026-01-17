@@ -1,0 +1,133 @@
+import glob
+import os
+
+
+def leia_projektifailid(laiend, asukoht="."):
+    if not laiend.startswith("."):
+        laiend = "." + laiend
+        print(laiend)
+
+    muster = os.path.join(asukoht, "*" + laiend)
+    failid = glob.glob(muster)
+    return failid
+
+
+def loo_raporti_kataloog(nimi="Analüüsi_Raportid"):
+    if not os.path.exists(nimi):
+        os.mkdir(nimi)
+        print("Kataloog loodud:", nimi)
+    else:
+        print("Kataloog on juba olemas:", nimi)
+
+
+def leia_failid_algustahega():
+    taht = input("Sisesta algustäht: ")
+    failid = glob.glob(taht + "*.*")
+
+    print("Leitud failid:")
+    for fail in failid:
+        print(fail)
+
+
+def analuusi_faili_sisu(failitee):
+    kokku_ridu = 0
+    tuhje_ridu = 0
+    todo_fixme = 0
+
+    with open(failitee, "r", encoding="utf-8") as fail:
+        for rida in fail:
+            kokku_ridu += 1
+
+            if rida.strip() == "":
+                tuhje_ridu += 1
+
+            todo_fixme += rida.count("TODO")
+            todo_fixme += rida.count("FIXME")
+
+    print("Fail:", failitee)
+    print("Kokku ridu:", kokku_ridu)
+    print("Tühje ridu:", tuhje_ridu)
+    print("TODO ja FIXME kokku:", todo_fixme)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    import glob  # Подключает модуль для поиска файлов по шаблону (*.txt, *.py и т.д.)
+import os    # Подключает модуль для работы с операционной системой: папки, пути, создание файлов
+
+# Функция для поиска файлов с определённым расширением
+def leia_projektifailid(laiend, asukoht="."):
+    # Проверяем, начинается ли расширение с точки "."
+    if not laiend.startswith("."):
+        laiend = "." + laiend  # Если нет, добавляем точку перед расширением
+        print(laiend)          # Выводим расширение для проверки
+
+    # Создаём шаблон поиска файлов: путь + "*" + расширение
+    # Например: "./*.txt" или "projekt/*.py"
+    muster = os.path.join(asukoht, "*" + laiend)
+
+    # glob.glob ищет все файлы, подходящие под шаблон
+    failid = glob.glob(muster)
+
+    return failid  # Возвращаем список найденных файлов
+
+# Функция для создания папки для отчетов
+def loo_raporti_kataloog(nimi="Analüüsi_Raportid"):
+    # Проверяем, существует ли уже папка с таким именем
+    if not os.path.exists(nimi):  # os.path.exists проверяет существование файла или папки
+        os.mkdir(nimi)             # os.mkdir создаёт новую папку с именем "nimi"
+        print("Kataloog loodud:", nimi)  # Сообщаем, что папка создана
+    else:
+        print("Kataloog on juba olemas:", nimi)  # Сообщаем, что папка уже есть
+
+# Функция для поиска файлов по первой букве
+def leia_failid_algustahega():
+    taht = input("Sisesta algustäht: ")  # input() спрашивает у пользователя букву
+    failid = glob.glob(taht + "*.*")     # Ищем все файлы, начинающиеся на эту букву
+
+    print("Leitud failid:")             # Выводим заголовок
+    for fail in failid:                  # Перебираем все найденные файлы
+        print(fail)                      # Выводим каждый файл на экран
+
+# Функция для анализа содержимого файла
+def analuusi_faili_sisu(failitee):
+    kokku_ridu = 0   # Счётчик всех строк
+    tuhje_ridu = 0   # Счётчик пустых строк
+    todo_fixme = 0   # Счётчик TODO и FIXME
+
+    # Открываем файл для чтения ("r") с кодировкой UTF-8
+    # "with" автоматически закроет файл после завершения блока
+    with open(failitee, "r", encoding="utf-8") as fail:
+        for rida in fail:          # Перебираем файл построчно
+            kokku_ridu += 1        # Увеличиваем счётчик всех строк
+
+            # rida.strip() удаляет пробелы и переносы строк в начале и конце строки
+            # Если после удаления пробелов строка пустая, считаем её пустой
+            if rida.strip() == "":
+                tuhje_ridu += 1
+
+            # rida.count("TODO") считает, сколько раз слово TODO встречается в строке
+            # rida.count("FIXME") аналогично
+            todo_fixme += rida.count("TODO")
+            todo_fixme += rida.count("FIXME")
+
+    # Выводим результаты анализа
+    print("Fail:", failitee)
+    print("Kokku ridu:", kokku_ridu)        # Всего строк
+    print("Tühje ridu:", tuhje_ridu)        # Пустых строк
+    print("TODO ja FIXME kokku:", todo_fixme)  # Сколько всего TODO и FIXME
