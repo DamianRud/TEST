@@ -1,0 +1,100 @@
+from random import randint
+sõne=input("Sisesta sõne;")
+sõne_lits=list(sõne)
+print("sõne oli:",sõne)
+print("Sõne listina:",sõne_lits)
+list2=[]
+print("Tühi list:",list2)
+
+while 1:
+    print("\n\n\Vali tegevus:")
+    print("1-lise elemente listi\n2-lisa elemente positsioonile")
+    print("3-kustuta elemente\n4-kustuta elemente positsioon")
+    print("5-listide ühendamine\n6-listide läbimine")
+    print("7-index ühendamine\n8-sort() kasutamine\n9-reverse()\n10-clear")
+    print("11-töö arvudega (max),(min),sum()")
+    while True:
+        try:
+            vastus=int(input("Sisesta tegevuse number:"))
+            if vastus>0 and vastus<10:
+                break
+
+        except:
+            print("Viga Palun sisesta tegevuse nember! ")
+
+        if vastus==1:
+            elemente=input("Sisesta element,mida soovid listi lisada:")
+            list2.append(elemente)
+            print("UUs list on:",list2)
+        elif vastus==2:
+            elemente=input("Sisesta positsion,kuhu soovid",elemente+"lisa")
+            while True:
+                try:
+                    pos=int(input("Sisestam positsioon,kuhu soovid",elemente))
+                    if pos>=0 and pos<=len(list2):
+                        break
+                except:
+                    print("Viga Palun Sisesta positsioon")
+            list2.insert(pos,elemente)
+            
+
+       
+
+        elif vastus == 3:
+            elemente = input("Sisesta elemente, mida soovid eemaldada")
+            mitu=list2.count(elemente)
+            if mitu==0:
+                print("Elementi",elemente+"Ei leitud listist")
+            else:
+                for i in range(mitu):
+                    list2.remove(elemente)
+                print("Emaldati",mitu+"korda element",elemente+"listist")
+
+        elif vastus == 4:
+            while True:
+                try:
+                    pos=int(input("Sisestam järjekorra number kustutava elemente:",elemente))
+                    if pos>=0 and pos<=len(list2):
+                        break
+                except:
+                    print("Viga Palun Sisesta positsioon")
+            kust_elemente=list2.pop(pos)
+            print("Eemalditi element ",kust_elemente+"positsioonilt",pos)
+
+        elif vastus==5:
+            print(sõne_lits+"Ühendatakse",list2+"-ga")
+            sõne_lits.extend(list2)
+            print("Uus sõne_list on:",sõne_lits)
+        elif vastus==6:
+            print("sõne_listi läbimine")
+            for i, el in enumerate(sõne_lits):
+                print("Positsioon",i+": Elemente",el)
+            print("sõne_list läbimine 2.variant:")
+            for el in sõne_lits:
+                print("Element",el)
+        elif vastus==7:
+            elemente=input("Sisesta element,mille positsiooni soovid leida:")
+            if elemente in list2:
+                pos=list2.elemente
+                print("Elemente",elemente+"asub positsioonil",pos)
+            elif vastus==8:
+                list2.sort()
+            elif vastus==9:
+                list2.reverse()
+            elif vastus==10:
+                list.clear()
+            elif vastus==11:
+                arvud=[]
+                for i in range(10):
+                    arvud.append(randint(1,100))
+                print("Arvude list:",arvud)
+                print("Suurim arv on:",max+arvud)
+                print("Suurim arv on:",min+arvud)
+                print("Väiksem arv on ",min+arvud)
+                print("Arvude summa on"sum+arvud)
+
+            else:
+                print("Elementi",elemente+"EI leitud listist")
+            
+
+            print("Uus list2 on:",list2)
