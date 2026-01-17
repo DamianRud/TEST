@@ -1,0 +1,133 @@
+import datetime
+
+# Списки для кодов
+icodes = []
+invalid_codes = []
+
+# Функция для проверки контрольной цифры
+def check_control_number(code):
+    weights1 = [1,2,3,4,5,6,7,8,9,1]
+    weights2 = [3,4,5,6,7,8,9,1,2,3]
+    
+    total1 = sum(int(code[i])*weights1[i] for i in range(10))
+    remainder = total1 % 11
+    if remainder != 10:
+        return remainder == int(code[10])
+    
+    total2 = sum(int(code[i])*weights2[i] for i in range(10))
+    remainder = total2 % 11
+    if remainder != 10:
+        return remainder == int(code[10])
+    
+    return int(code[10]) == 0
+
+# Функция для определения пола
+def get_gender(first_digit):
+    if first_digit in ["1","3","5"]:
+        return "мужчина"
+    elif first_digit in ["2","4","6"]:
+        return "женщина"
+    else:
+        return None
+
+# Функция для даты рождения
+def get_birth_date(code):
+    year_prefix = {"1":"18","2":"18","3":"19","4":"19","5":"20","6":"20"}
+    yy = code[1:3]
+    mm = code[3:5]
+    dd = code[5:7]
+    year = int(year_prefix[code[0]] + yy)
+    month = int(mm)
+    day = int(dd)
+    try:
+        date = datetime.date(year, month, day)
+        return date.strftime("%d.%m.%Y")
+    except:
+        return None
+
+# Функция для определения больницы по порядковому номеру
+def get_hospital(code):
+    number = int(code[7:10])
+    if 1 <= number <= 10:
+        return "Больница Курессааре"
+    elif 11 <= number <= 19:
+        return "Женская поликлиника Тартуского университета, Тарту"
+    elif 21 <= number <= 220:
+        return "Восточно-Таллиннская центральная больница, Пельгулиннский родильный дом, Хийумаа, Кейла, Раплская больница, Локса больница"
+    elif 221 <= number <= 270:
+        return "Восточно-Вируская центральная больница (Кохтла-Ярве, бывший Йыхви)"
+    elif 271 <= number <= 370:
+        return "Маарьямыйза Поликлиника (Тарту), Йыгеваская больница"
+    elif 371 <= number <= 420:
+        return "Нарвская больница"
+    elif 421 <= number <= 470:
+        return "Пярнуская больница"
+    elif 471 <= number <= 490:
+        return "Родильный дом Пельгулинна (Таллинн), Хаапсалуская больница"
+    elif 491 <= number <= 520:
+        return "Ярвамааская больница (Пайде)"
+    elif 521 <= number <= 570:
+        return "Раквере, Тапаская больница"
+    elif 571 <= number <= 600:
+        return "Больница Валга"
+    elif 601 <= number <= 650:
+        return "Вильяндиская больница"
+    elif 651 <= number <= 700:
+        return "Южно-Эстонская больница (Выру), Пылваская больница"
+    else:
+        return "Неизвестная больница"
+
+# Основной цикл
+while True:
+    code = input("Введите личный код (или 'stop' для выхода): ").strip()
+    if code.lower() == "stop":
+        break
+
+    # Проверка длины и цифр
+    if len(code) != 11 or not code.isdigit():
+        print("Недопустимый код: неверное количество цифр.")
+        invalid_codes.append(code)
+        continue
+
+    # Проверка первого символа
+    if code[0] not in ["1","2","3","4","5","6"]:
+        print("Недопустимый код: неверный первый символ.")
+        invalid_codes.append(code)
+        continue
+
+    # Проверка даты
+    birth_date = get_birth_date(code)
+    if not birth_date:
+        print("Недопустимый код: неверная дата рождения.")
+        invalid_codes.append(code)
+        continue
+
+    # Проверка контрольного числа
+    if not check_control_number(code):
+        print("Недопустимый код: контрольное число не совпадает.")
+        invalid_codes.append(code)
+        continue
+
+    # Определение пола
+    gender = get_gender(code[0])
+
+    # Определение больницы
+    hospital = get_hospital(code)
+
+    # Вывод результата
+    print("Это " + gender + ", его/ее день рождения " + birth_date + " и место рождения " + hospital)
+
+    # Добавляем в список верных кодов
+    icodes.append(code)
+
+# Сортировка списков
+invalid_codes.sort(key=lambda x: get_birth_date(x) if len(x)==11 else "9999")  # по дате рождения
+icodes_sorted = [c for c in icodes if c[0] in ["2","4","6"]] + [c for c in icodes if c[0] in ["1","3","5"]]
+
+print("\nСписок верных кодов (icodes):")
+for c in icodes_sorted:
+    print(c)
+
+print("\nСписок неверных кодов:")
+for c in invalid_codes:
+    print(c)
