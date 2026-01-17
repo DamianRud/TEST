@@ -1,0 +1,129 @@
+Modul
+def summa(arv1:float,arv2:float)->float:
+    """tagastab kahe arvu summa.
+    :param float arv1: Esimine arv
+    .param float arv2: Teine arv
+    :return float: Arvude summa
+    """
+    s=arv1+arv2
+    return s
+    
+def int_kontrol(sisend:str)->int:
+    """sisestatud tekst teisendab ujukomaarvuks.
+    kui sisestatud tähed ei ole arv,siis palub uuesti sisestada.
+    :parama str sisend: sisestatud tekst
+    :return float: Teisendatud ujukomaarv
+    """
+    while True:
+        try:
+            arv=int(sisend)
+            return arv
+        except ValueError:
+            sisend=input("Sisesta palun arvutamiseks arv:")
+
+
+def arithmetic(a:float,b:float,tehe:str)->any:
+    """Teeb kahe arvu vahel soovitud tehte.
+    :param float a: Esimine arv
+    :param float b:Teine arv
+    :param str tehe: Tehte liik(+,-,*,/)
+    :return any: tehte tulemus
+    """
+    if tehe in ["+","-","*","/","**"]:
+        if tehe=="/" and b==0:
+            vastus="DIV/0"
+        else:
+            vastus=eval(f"{a}{tehe}{b}")
+    else:
+        vastus="Tundmatu tehe"
+    return vastus
+
+
+def is_year_leap(aasta:int)->bool:
+    """Kontrollib,kas antud aasta on liigaasta.
+    :param int aasta: kontrollivatav aasta 
+    :return bool: True kui liigasta False kui tavaline aasta
+    """
+
+    if aasta %4==0:
+        return True
+    else:
+        return False
+
+
+
+
+
+def square(küljepikkus:float)->any:
+    """arvutab ruudu pindala.
+    :param float küljepikkus: Ruudu küljepikkus
+    :return float: Ruudu pindala
+    :return float: Ruudu ümbermõõt
+    :return float: Ruudu diagonaal
+    """
+
+    pindala=küljepikkus**2
+    ümbermõõt=4*küljepikkus
+    diagonaal=küljepikkus*2**0,5
+
+    return pindala,ümbermõõt,diagonaal
+    
+def min_max(numbers:list)->any:
+  """leiab minimalne ja maksimalne arvud loendist
+  :param list numbers: arvude list 
+  :return int: minimalne ja minemalne arv
+  """
+    
+    minimum = min(numbers)
+    maximum = max(numbers)
+    
+    
+    return minimum, maximum
+
+
+
+
+
+
+
+      
+
+      from module1 import *
+
+#a=5
+#b=int_kontrol(input("Sisesta teine arv:"))
+#c=summa(a,b)
+#print("Arvude",a,"ja",b,"summa on",c,".")
+
+
+#print("Funktsiooni arithmetic() kasutamine:")
+#x=int_kontrol(input("Sisesta esimene arv:"))
+#y=int_kontrol(input("Sisesta teine arv:"))
+#op=input("Sisesta tehe(+,-,*,/,**):")
+#print(f"{x}{op}{y}={arithmetic(x,y,op)}")
+
+# print("Funktsion is_year_leap() kasutamine")
+# for i in range(3):
+#     aasta=int_kontrol(input("Sisesta aasta:"))
+#     if is_year_leap(aasta):
+#         print(f"{aasta} on liigaasta.")
+#     else:
+#         print(f"{aasta} on tavaline aasta.")
+
+
+# print("Funktsion square() Kasutamine")
+# for i in range(3):
+#     külg=int_kontrol(input("Sisesta ruudu külje pikkus"))
+#     S,P,d=square(külg)
+#     print(f"Pindala on {S},Ümbermõõt on{P},diagonaal on {d}.")
+
+
+
+
+
+print("Funktsion min_max() Kasutamine")
+numbers_list = [3, 1, 100, 0, 5]
+result = min_max(numbers_list)
+
+
+print(result)
