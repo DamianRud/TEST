@@ -1,0 +1,187 @@
+import datetime
+import calendar
+import math
+
+# =========================
+# Задание 1 — Текущая дата и возраст
+# =========================
+print("Ülesanne 1: Tervitus ja tänane kuupäev")
+tana = datetime.date.today()
+
+# Разные форматы даты
+tana_format1 = tana.strftime("%d/%m/%Y")
+tana_format2 = tana.strftime("%B %d, %Y")
+tana_format3 = tana.strftime("%m/%d/%y")
+tana_format4 = tana.strftime("%b-%d-%Y")
+
+print("Täna (vorming 1): " + tana_format1)
+print("Täna (vorming 2): " + tana_format2)
+print("Täna (vorming 3): " + tana_format3)
+print("Täna (vorming 4): " + tana_format4)
+
+# Количество дней до конца месяца
+days_in_month = calendar.monthrange(tana.year, tana.month)[1]
+days_left_month = days_in_month - tana.day
+print("Päevi kuu lõpuni:", days_left_month)
+
+# Количество дней до конца года
+days_left_year = (datetime.date(tana.year, 12, 31) - tana).days
+print("Päevi aasta lõpuni:", days_left_year)
+
+# Расчет возраста пользователя
+while True:
+    try:
+        birth_year = int(input("Sisesta sünniaasta => "))
+        birth_month = int(input("Sisesta sünnikuu => "))
+        birth_day = int(input("Sisesta sünnipäev => "))
+        birth_date = datetime.date(birth_year, birth_month, birth_day)
+        break
+    except ValueError:
+        print("Viga: sisesta korrektne kuupäev")
+
+age_days = (tana - birth_date).days
+age_years = age_days // 365
+age_months = age_years * 12 + (tana.month - birth_date.month)
+print("Sinu vanus aastates:", age_years)
+print("Sinu vanus kuudes:", age_months)
+print("Sinu vanus päevades:", age_days)
+
+print("\n")
+
+# =========================
+# Задание 2 — Выражения
+# =========================
+print("Ülesanne 2: Avaldise arvutamine")
+rez1 = 3 + 8 / (4 - 2) * 4
+rez2 = (3 + 8 / (4 - 2)) * 4
+rez3 = 3 + 8 / 4 - 2 * 4
+
+print("3 + 8 / (4 - 2) * 4 =", rez1)
+print("(3 + 8 / (4 - 2)) * 4 =", rez2)
+print("3 + 8 / 4 - 2 * 4 =", rez3)
+print("Sulud mõjutavad tehte järjekorda\n")
+
+# =========================
+# Задание 3 — Квадрат и круг
+# =========================
+print("Ülesanne 3: Ruut ja sees olev ring")
+while True:
+    try:
+        R = float(input("Sisesta ringi raadius => "))
+        break
+    except ValueError:
+        print("Viga: sisesta number")
+
+ruut_kylg = 2 * R
+ruut_pindala = ruut_kylg ** 2
+ruut_ymbermoot = 4 * ruut_kylg
+
+ring_pindala = math.pi * R ** 2
+ring_ymbermoot = 2 * math.pi * R
+
+print("Ruutu pindala:", ruut_pindala)
+print("Ruutu ümbermõõt:", ruut_ymbermoot)
+print("Ringi pindala:", round(ring_pindala, 2))
+print("Ringi ümbermõõt:", round(ring_ymbermoot, 2))
+
+print("\n")
+
+# =========================
+# Задание 4 — Земля и двухевровые монеты
+# =========================
+print("Ülesanne 4: Maa ümbermõõt kaheeuriste müntidega")
+radius_earth_km = 6378  # радиус Земли в км
+diameter_coin_m = 0.025  # диаметр двухевровой монеты в метрах
+
+# Перевод радиуса в метры
+circumference_earth_m = 2 * math.pi * radius_earth_km * 1000
+coins_needed = circumference_earth_m / diameter_coin_m
+print("Vajalik kaheeuriste müntide arv:", int(coins_needed))
+
+print("\n")
+
+# =========================
+# Задание 5 — Kill-Koll
+# =========================
+print("Ülesanne 5: Kill-Koll")
+sõna1 = "KILL-KOLL"
+sõna2 = "KILLADI-KOLL"
+järjend = [sõna1, sõna1, sõna2, sõna1, sõna2, sõna1, sõna1, sõna1, sõna1]
+for w in järjend:
+    print(w, end=" ")
+print("\n")
+
+# =========================
+# Задание 6 — Песня
+# =========================
+print("Ülesanne 6: Laul suurtes tähtedes")
+print("RONG SUMISEB TOK-TOK-TOK,")
+print("SIRISEV PART OLI KONDUKTOR.")
+print("RATTAID SUMISEB TOK-TOK,")
+print("TOK-TOK JA TOK-TOK.")
+print("AGA RONGIS,")
+print("TEATE TE, KES SEAL OLI?")
+print("RONG SUMISEB TOK-TOK-TOK,")
+print("SIRISEV PART OLI KONDUKTOR.")
+print("RATTAID SUMISEB TOK-TOK,")
+print("TOK-TOK JA TOK-TOK.\n")
+
+# =========================
+# Задание 7 — Прямоугольник
+# =========================
+print("Ülesanne 7: Ristkülik")
+while True:
+    try:
+        kylg_a = float(input("Sisesta esimese külje pikkus => "))
+        kylg_b = float(input("Sisesta teise külje pikkus => "))
+        break
+    except ValueError:
+        print("Viga: sisesta number")
+
+perimeeter_rect = 2 * (kylg_a + kylg_b)
+pindala_rect = kylg_a * kylg_b
+print("Ristküliku perimeeter:", perimeeter_rect)
+print("Ristküliku pindala:", pindala_rect)
+print("\n")
+
+# =========================
+# Задание 8 — Расход топлива
+# =========================
+print("Ülesanne 8: Kütusekulu")
+while True:
+    try:
+        kütus_liitrid = float(input("Sisesta kütuse kogus liitrites => "))
+        vahemaa_km = float(input("Sisesta läbitud vahemaa km => "))
+        break
+    except ValueError:
+        print("Viga: sisesta number")
+
+kulu_100km = (kütus_liitrid / vahemaa_km) * 100
+print("Keskmine kütusekulu 100 km kohta:", round(kulu_100km, 2))
+
+print("\n")
+
+# =========================
+# Задание 9 — Роликовые коньки
+# =========================
+print("Ülesanne 9: Rulluisud")
+kiirus_kmh = 29.9
+vahemaa_min = kiirus_kmh / 60
+print("Vahemaa, mis läbitakse minutiga:", round(vahemaa_min, 2), "km")
+
+print("\n")
+
+# =========================
+# Задание 10 — Преобразование времени
+# =========================
+print("Ülesanne 10: Aja teisendamine")
+while True:
+    try:
+        minutid_input = int(input("Sisesta minutite arv => "))
+        break
+    except ValueError:
+        print("Viga: sisesta täisarv")
+
+tunnid = minutid_input // 60
+minutid_järel = minutid_input % 60
+print("Aeg:", str(tunnid) + ":" + str(minutid_järel))
