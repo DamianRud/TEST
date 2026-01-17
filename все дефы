@@ -1,0 +1,579 @@
+import random
+import string
+
+inimesed = ["A", "B", "C", "D", "E", "F"]
+palgad = [1000, 1200, 2500, 800, 750, 1200]
+
+# 1. Генерация случайных данных
+def lisa_juhuslik_andmeid():
+    try:
+        uute_arv = random.randint(5, 15)
+        
+        for _ in range(uute_arv):
+            nime_pikkus = random.randint(2, 3)
+            nimi = ""
+            for _ in range(nime_pikkus):
+                nimi += random.choice(string.ascii_uppercase)
+            
+            palk = random.randint(500, 3000)
+            
+            inimesed.append(nimi)
+            palgad.append(palk)
+        
+        print("Lisati " + str(uute_arv) + " juhuslikku inimest.")
+    except:
+        print("Viga juhuslike andmete lisamisel")
+
+# 2. Добавление данных вручную
+def lisa_andmed():
+    try:
+        kogus = int(input("Sisesta: kui palju inimesi lisada "))
+        
+        for inimese in range(kogus):
+            nimi = input("Sisesta nimi töötaja ")
+            palk = int(input("Sisesta palk töötaja "))
+            print("Nimi", nimi, "Palk", palk)
+
+            inimesed.append(nimi)
+            palgad.append(palk)
+
+        print("Lisatud:", inimesed, palgad)
+    except ValueError:
+        print("Vigane sisend! Sisesta number.")
+    except:
+        print("Tekkis viga andmete lisamisel")
+
+# 3. Удаление данных
+def kustuta_andmeid():
+    try:
+        nimi = input("Sisesta nimi, keda kustutada: ")
+        
+        if nimi not in inimesed:
+            print("Ei leitud")
+            return
+        
+        i = 0
+        while i < len(inimesed):
+            if inimesed[i] == nimi:
+                inimesed.pop(i)
+                palgad.pop(i)
+            else:
+                i += 1
+        
+        print("Kustutatud inimese", nimi, "andmed")
+    except:
+        print("Viga andmete kustutamisel")
+
+# 4. Самая высокая зарплата
+def suurim_palk():
+    try:
+        if len(palgad) == 0:
+            print("Nimekiri on tühi!")
+            return
+            
+        max_palk = max(palgad)
+        print("Suurim palk:", max_palk)
+
+        for i in range(len(palgad)):
+            if palgad[i] == max_palk:
+                print("Saaja:", inimesed[i])
+    except:
+        print("Viga suurima palga leidmisel")
+
+# 5. Самая низкая зарплата
+def vaikseim_palk():
+    try:
+        if len(palgad) == 0:
+            print("Nimekiri on tühi!")
+            return
+            
+        min_palk = min(palgad)
+        print("Väikseim palk:", min_palk)
+
+        for i in range(len(palgad)):
+            if palgad[i] == min_palk:
+                print("Saaja:", inimesed[i])
+    except:
+        print("Viga väikseima palga leidmisel")
+
+# 6. Сортировка зарплат
+def jarjesta_palgad():
+    try:
+        if len(palgad) == 0:
+            print("Nimekiri on tühi!")
+            return
+        
+        andmed = []
+        for i in range(len(inimesed)):
+            andmed.append((inimesed[i], palgad[i]))
+        
+        kasvavalt = sorted(andmed, key=lambda x: x[1])
+        print("Palgad kasvavas järjekorras:")
+        for nimi, palk in kasvavalt:
+            print("  " + nimi + ":", palk, "€")
+        
+        kahanevalt = sorted(andmed, key=lambda x: x[1], reverse=True)
+        print("Palgad kahanevas järjekorras:")
+        for nimi, palk in kahanevalt:
+            print("  " + nimi + ":", palk, "€")
+    except:
+        print("Viga sorteerimisel")
+
+# 7. Равные зарплаты
+def vordsed_palgad():
+    try:
+        if len(palgad) == 0:
+            print("Nimekiri on tühi!")
+            return
+        
+        palkade_sagedus = {}
+        for i in range(len(inimesed)):
+            palk = palgad[i]
+            if palk not in palkade_sagedus:
+                palkade_sagedus[palk] = []
+            palkade_sagedus[palk].append(inimesed[i])
+        
+        vordsed_leitud = False
+        for palk, nimed in palkade_sagedus.items():
+            if len(nimed) > 1:
+                print("Palk " + str(palk) + "€ saavad:", ", ".join(nimed))
+                vordsed_leitud = True
+        
+        if not vordsed_leitud:
+            print("Võrdseid palkasid ei leitud.")
+    except:
+        print("Viga võrdsete palkade leidmisel")
+
+# 8. Поиск зарплаты по имени
+def palga_otsing():
+    try:
+        if len(inimesed) == 0:
+            print("Nimekiri on tühi!")
+            return
+        
+        nimi = input("Sisestage otsitava inimese nimi: ")
+        
+        leitud = False
+        for i in range(len(inimesed)):
+            if inimesed[i].lower() == nimi.lower():
+                print("Leitud:", inimesed[i], "palk:", palgad[i], "€")
+                leitud = True
+        
+        if not leitud:
+            print("Inimest nimega '" + nimi + "' ei leitud.")
+    except:
+        print("Viga otsimisel")
+
+# 9. Зарплаты выше/ниже предела
+def piiratud_palk():
+    try:
+        if len(palgad) == 0:
+            print("Nimekiri on tühi!")
+            return
+        
+        piir = int(input("Sisestage piirisumma: "))
+        valik = input("Soovite leida palgad, mis on (1) üle piiri või (2) alla piiri? ")
+        
+        if valik == "1":
+            tekst = "üle"
+            leitud = False
+            for i in range(len(palgad)):
+                if palgad[i] > piir:
+                    print("  " + inimesed[i] + ":", palgad[i], "€")
+                    leitud = True
+            if not leitud:
+                print("Ei leidu inimesi, kelle palk on üle " + str(piir) + "€.")
+                
+        elif valik == "2":
+            tekst = "alla"
+            leitud = False
+            for i in range(len(palgad)):
+                if palgad[i] < piir:
+                    print("  " + inimesed[i] + ":", palgad[i], "€")
+                    leitud = True
+            if not leitud:
+                print("Ei leidu inimesi, kelle palk on alla " + str(piir) + "€.")
+        else:
+            print("Vigane valik!")
+    except ValueError:
+        print("Vigane sisend! Sisesta number.")
+    except:
+        print("Viga piiratud palga leidmisel")
+
+# 10. TOP T самых богатых и бедных
+def top_t():
+    try:
+        if len(palgad) < 2:
+            print("Liiga vähe andmeid!")
+            return
+        
+        t = int(input("Sisestage T väärtus: "))
+        
+        if t > len(palgad) // 2:
+            print("T liiga suur! Maksimaalne T selle andmemahuga:", len(palgad) // 2)
+            return
+        
+        andmed = []
+        for i in range(len(inimesed)):
+            andmed.append((inimesed[i], palgad[i]))
+        
+        sorteeritud = sorted(andmed, key=lambda x: x[1])
+        
+        print(str(t) + " vaeseimat inimest:")
+        for i in range(min(t, len(sorteeritud))):
+            nimi, palk = sorteeritud[i]
+            print("  " + str(i+1) + ". " + nimi + ":", palk, "€")
+        
+        print(str(t) + " rikkaimat inimest:")
+        for i in range(1, min(t, len(sorteeritud)) + 1):
+            nimi, palk = sorteeritud[-i]
+            print("  " + str(i) + ". " + nimi + ":", palk, "€")
+            
+    except ValueError:
+        print("Vigane sisend! Sisesta number.")
+    except:
+        print("Viga TOP T leidmisel")
+
+# 11. Средняя зарплата
+def keskmine_palk():
+    try:
+        if len(palgad) == 0:
+            print("Nimekiri on tühi!")
+            return
+            
+        keskmine = sum(palgad) / len(palgad)
+        print("Keskmine palk:", round(keskmine, 2))
+
+        leitud = False
+        for i in range(len(palgad)):
+            if abs(palgad[i] - keskmine) < 0.01:
+                print("Saaja:", inimesed[i])
+                leitud = True
+        
+        if not leitud:
+            print("Keegi ei saa täpselt keskmist palka.")
+    except:
+        print("Viga keskmise palga arvutamisel")
+
+# 12. Расчет подоходного налога
+def tulumaks():
+    try:
+        if len(palgad) == 0:
+            print("Nimekiri on tühi!")
+            return
+        
+        MAKSUVABA_TULU = 654
+        TULUMAKSU_MÄÄR = 0.20
+        
+        print("Netopalk pärast tulumaksu:")
+        print("-" * 30)
+        
+        for i in range(len(palgad)):
+            brutopalk = palgad[i]
+            
+            if brutopalk <= MAKSUVABA_TULU:
+                maksuvaba = brutopalk
+            else:
+                maksuvaba = MAKSUVABA_TULU - (brutopalk - 1200) * 0.55556
+                if maksuvaba < 0:
+                    maksuvaba = 0
+            
+            maksualune_summa = brutopalk - maksuvaba
+            if maksualune_summa < 0:
+                maksualune_summa = 0
+            
+            tulumaks_summa = maksualune_summa * TULUMAKSU_MÄÄR
+            netopalk = brutopalk - tulumaks_summa
+            
+            print(inimesed[i] + " " + str(brutopalk) + "€ -> " + str(round(netopalk, 2)) + "€ (tulumaks: " + str(round(tulumaks_summa, 2)) + "€)")
+    except:
+        print("Viga tulumaksu arvutamisel")
+
+# 13. Сортировка по имени
+def sorteeri_nime_jargi():
+    try:
+        if len(inimesed) == 0:
+            print("Nimekiri on tühi!")
+            return
+        
+        valik = input("Sorteeri (1) A-Я või (2) Я-А? ")
+        
+        andmed = []
+        for i in range(len(inimesed)):
+            andmed.append((inimesed[i], palgad[i]))
+        
+        if valik == "1":
+            andmed.sort(key=lambda x: x[0].lower())
+            print("Sorteeritud A-Я järjekorras:")
+        elif valik == "2":
+            andmed.sort(key=lambda x: x[0].lower(), reverse=True)
+            print("Sorteeritud Я-А järjekorras:")
+        else:
+            print("Vigane valik!")
+            return
+        
+        inimesed.clear()
+        palgad.clear()
+        
+        for nimi, palk in andmed:
+            inimesed.append(nimi)
+            palgad.append(palk)
+        
+        for nimi, palk in andmed:
+            print("  " + nimi + ":", palk, "€")
+    except:
+        print("Viga nime järgi sorteerimisel")
+
+# 14. Удаление работников с зарплатой ниже среднего
+def Eemalda_Alla_Keskmise():
+    try:
+        if len(palgad) == 0:
+            print("Nimekiri on tühi!")
+            return
+            
+        nim_vaiksem = sum(palgad) / len(palgad)
+        print("Keskmine palk:", round(nim_vaiksem, 2))
+
+        i = 0
+        kustutatud = 0
+        while i < len(palgad):
+            if palgad[i] < nim_vaiksem:
+                inimesed.pop(i)
+                palgad.pop(i)
+                kustutatud += 1
+            else:
+                i += 1
+
+        print("Kustutati " + str(kustutatud) + " inimest.")
+        print("Jäänud inimesed:", inimesed)
+        print("Jäänud palgad:", palgad)
+    except:
+        print("Viga alla keskmise eemaldamisel")
+
+# 15. Форматирование данных
+def vorminda_andmed():
+    try:
+        for i in range(len(inimesed)):
+            if inimesed[i]:
+                inimesed[i] = inimesed[i].capitalize()
+        
+        for i in range(len(palgad)):
+            if isinstance(palgad[i], float):
+                palgad[i] = int(round(palgad[i]))
+        
+        print("Andmed vormindatud:")
+        for i in range(len(inimesed)):
+            print("  " + inimesed[i] + ":", palgad[i], "€")
+    except:
+        print("Viga andmete vormindamisel")
+
+# 16. Повышение зарплаты через T лет
+def palga_tous():
+    try:
+        if len(palgad) == 0:
+            print("Nimekiri on tühi!")
+            return
+        
+        t = int(input("Sisestage aastate arv T: "))
+        valik = input("Arvutada (1) kõigile või (2) konkreetsele inimesele? ")
+        
+        TOUS_PROTSENT = 5
+        
+        if valik == "1":
+            print("Palgad " + str(t) + " aasta pärast (5% tõus aastas):")
+            print("-" * 40)
+            for i in range(len(palgad)):
+                uus_palk = palgad[i] * ((1 + TOUS_PROTSENT/100) ** t)
+                print(inimesed[i] + " " + str(palgad[i]) + "€ -> " + str(round(uus_palk, 2)) + "€")
+                
+        elif valik == "2":
+            nimi = input("Sisestage inimese nimi: ")
+            
+            leitud = False
+            for i in range(len(inimesed)):
+                if inimesed[i].lower() == nimi.lower():
+                    uus_palk = palgad[i] * ((1 + TOUS_PROTSENT/100) ** t)
+                    print(inimesed[i] + ": " + str(palgad[i]) + "€ -> " + str(round(uus_palk, 2)) + "€ (" + str(t) + " aasta pärast)")
+                    leitud = True
+            
+            if not leitud:
+                print("Inimest nimega '" + nimi + "' ei leitud.")
+        else:
+            print("Vigane valik!")
+            
+    except ValueError:
+        print("Vigane sisend! Sisesta number.")
+    except:
+        print("Viga palgatõusu arvutamisel")
+
+# 17. Переименование каждого третьего
+def nimeta_umber():
+    try:
+        if len(inimesed) == 0:
+            print("Nimekiri on tühi!")
+            return
+        
+        print("Iga kolmas inimest saab uue nime.")
+        print("Praegune nimekiri:")
+        for i in range(len(inimesed)):
+            print("  " + str(i+1) + ". " + inimesed[i])
+        
+        uuendatud = 0
+        for i in range(2, len(inimesed), 3):
+            uus_nimi = input("Sisestage uus nimi inimesele " + inimesed[i] + ": ")
+            if uus_nimi:
+                vana_nimi = inimesed[i]
+                inimesed[i] = uus_nimi
+                uuendatud += 1
+                print("  " + vana_nimi + " -> " + uus_nimi)
+        
+        print("Uuendati " + str(uuendatud) + " nime.")
+    except:
+        print("Viga ümbernimetamisel")
+
+# 18. Редактирование данных
+def redigeeri_andmeid():
+    try:
+        if len(inimesed) == 0:
+            print("Nimekiri on tühi!")
+            return
+        
+        print("Praegune nimekiri:")
+        for i in range(len(inimesed)):
+            print("  " + str(i+1) + ". " + inimesed[i] + ":", palgad[i], "€")
+        
+        valik = input("Mida soovite muuta? (1) nime või (2) palka? ")
+        
+        if valik == "1":
+            vana_nimi = input("Sisestage muudetava inimese nimi: ")
+            
+            leitud = False
+            for i in range(len(inimesed)):
+                if inimesed[i].lower() == vana_nimi.lower():
+                    uus_nimi = input("Uus nimi inimesele " + inimesed[i] + ": ")
+                    if uus_nimi:
+                        inimesed[i] = uus_nimi
+                        print(vana_nimi + " -> " + uus_nimi)
+                        leitud = True
+            
+            if not leitud:
+                print("Inimest nimega '" + vana_nimi + "' ei leitud.")
+                
+        elif valik == "2":
+            nimi = input("Sisestage inimese nimi, kelle palka soovite muuta: ")
+            
+            leitud = False
+            for i in range(len(inimesed)):
+                if inimesed[i].lower() == nimi.lower():
+                    uus_palk = float(input("Uus palk inimesele " + inimesed[i] + ": "))
+                    vana_palk = palgad[i]
+                    palgad[i] = uus_palk
+                    print(inimesed[i] + ": " + str(vana_palk) + "€ -> " + str(uus_palk) + "€")
+                    leitud = True
+            
+            if not leitud:
+                print("Inimest nimega '" + nimi + "' ei leitud.")
+        else:
+            print("Vigane valik!")
+            
+    except ValueError:
+        print("Vigane sisend!")
+    except:
+        print("Viga andmete redigeerimisel")
+
+# 19. Поиск по начальной букве
+def otsi_algustahe():
+    try:
+        if len(inimesed) == 0:
+            print("Nimekiri on tühi!")
+            return
+        
+        taht = input("Sisestage otsitav algustäht: ").strip().upper()
+        
+        if len(taht) != 1 or not taht.isalpha():
+            print("Palun sisestage üks täht!")
+            return
+        
+        leitud = False
+        print("Inimesed, kelle nimi algab tähega '" + taht + "':")
+        print("-" * 30)
+        
+        for i in range(len(inimesed)):
+            if inimesed[i] and inimesed[i][0].upper() == taht:
+                print("  " + inimesed[i] + ":", palgad[i], "€")
+                leitud = True
+        
+        print("-" * 30)
+        
+        if leitud:
+            loendur = 0
+            for i in range(len(inimesed)):
+                if inimesed[i] and inimesed[i][0].upper() == taht:
+                    loendur += 1
+            print("Kokku: " + str(loendur) + " inimest")
+        else:
+            print("Ei leidu inimesi, kelle nimi algaks tähega '" + taht + "'.")
+    except:
+        print("Viga algustähe järgi otsimisel")
+
+# 20. Собственная функция: группировка по диапазонам зарплат
+def minu_eri_funktsioon():
+    try:
+        if len(palgad) == 0:
+            print("Nimekiri on tühi!")
+            return
+        
+        vahemikud = [
+            (0, 1000, "Alla 1000€"),
+            (1000, 1500, "1000-1500€"),
+            (1500, 2000, "1500-2000€"),
+            (2000, 2500, "2000-2500€"),
+            (2500, 3000, "2500-3000€"),
+            (3000, 1000000, "Üle 3000€")
+        ]
+        
+        grupid = {}
+        for vahemik in vahemikud:
+            grupid[vahemik[2]] = []
+        
+        for i in range(len(palgad)):
+            palk = palgad[i]
+            for alampiir, ulempiir, nimi_vahemik in vahemikud:
+                if alampiir <= palk < ulempiir:
+                    grupid[nimi_vahemik].append((inimesed[i], palgad[i]))
+                    break
+        
+        print("Töötajate jaotus palgavahemike järgi:")
+        print("=" * 40)
+        
+        kokku_inimesi = 0
+        for vahemik_nimi in vahemikud:
+            nimi_vahemik = vahemik_nimi[2]
+            inimesed_vahemikus = grupid[nimi_vahemik]
+            if inimesed_vahemikus:
+                print("")
+                print(nimi_vahemik + " (" + str(len(inimesed_vahemikus)) + " inimest):")
+                kokku_inimesi += len(inimesed_vahemikus)
+                for nimi, palk in inimesed_vahemikus:
+                    print("  • " + nimi + ":", palk, "€")
+        
+        print("=" * 40)
+        print("Kokku: " + str(kokku_inimesi) + " inimest")
+    except:
+        print("Viga palgavahemike leidmisel")
+
+# 21. Показать текущие данные
+def kuva_andmed():
+    try:
+        if len(inimesed) == 0:
+            print("Nimekiri on tühi!")
+            return
+        
+        print("Praegused andmed:")
+        print("-" * 30)
+        for i in range(len(inimesed)):
+            print(str(i+1) + ". " + inimesed[i] + ":", palgad[i], "€")
+        print("-" * 30)
+        print("Kokku: " + str(len(inimesed)) + " inimest")
+    except:
+        print("Viga andmete kuvamisel")
