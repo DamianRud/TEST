@@ -1,0 +1,157 @@
+
+
+tekst = ""
+valik = ""
+
+while valik != "5":
+    print()
+    print("1. Sisesta tekst")
+    print("2. Kärbi servad (strip)")
+    print("3. Eemalda topeltvahed")
+    print("4. Näita pikkust ilma tühikuteta")
+    print("5. Välju")
+
+    valik = input("Vali number: ")
+
+    if valik == "1":
+        tekst = input("Sisesta tekst: ")
+
+    elif valik == "2":
+        if tekst == "":
+            print("Sisesta tekst kõigepealt!")
+        else:
+            tekst = tekst.strip()
+            print("Servad kärbitud!")
+
+    elif valik == "3":
+        if tekst == "":
+            print("Sisesta tekst kõigepealt!")
+        else:
+            while "  " in tekst:
+                tekst = tekst.replace("  ", " ")
+            print("Topeltvahed eemaldatud!")
+
+    elif valik == "4":
+        if tekst == "":
+            print("Sisesta tekst kõigepealt!")
+        else:
+            ilma_tuhikuteta = tekst.replace(" ", "")
+            print("Pikkus ilma tühikuteta:", len(ilma_tuhikuteta))
+
+    elif valik == "5":
+        print("Head aega!")
+
+    else:
+        print("Sellist valikut pole!")
+
+
+
+
+
+
+
+
+while True:
+    nimi = input("Sisesta kasutajanimi: ")
+    nimi = nimi.strip()
+
+    if len(nimi) < 4 or len(nimi) > 12:
+        print("Nimi peab olema 4–12 tähemärki pikk.")
+        continue
+
+    if " " in nimi:
+        print("Nimi ei tohi sisaldada tühikuid.")
+        continue
+
+    sobib = True
+    for märk in nimi:
+        if not (märk.isalpha() or märk.isdigit()):
+            print("Lubatud on ainult tähed ja numbrid.")
+            sobib = False
+            break
+
+    if sobib:
+        print("Nimi sobib!")
+        break
+
+
+
+
+
+
+
+
+
+
+
+while True:
+    täisnimi = input("Sisesta oma ees- ja perekonnanimi: ")
+    täisnimi = täisnimi.strip()
+
+    while "  " in täisnimi:
+        täisnimi = täisnimi.replace("  ", " ")
+
+    osad = täisnimi.split(" ")
+
+    if len(osad) < 2:
+        print("Palun sisesta vähemalt ees- ja perekonnanimi!")
+        continue
+
+    uus_nimi = ""
+    for osa in osad:
+        uus_nimi = uus_nimi + osa.title() + " "
+
+    print("Sinu nimi:", uus_nimi.strip())
+    break
+
+
+
+
+
+
+
+tekst = input("Sisesta tekst: ")
+tekst = tekst.strip()
+uus = ""
+eelmine_tyhik = False
+
+for märk in tekst:
+    if märk.isalpha() or märk.isdigit():
+        uus = uus + märk
+        eelmine_tyhik = False
+    elif märk == " " or märk == "\t" or märk == "\n":
+        if not eelmine_tyhik:
+            uus = uus + " "
+            eelmine_tyhik = True
+    # muud märgid jäetakse vahele
+
+print("Puhastatud tekst:", uus.strip())
+
+
+
+
+
+
+
+
+
+kokku = 0
+tühje = 0
+lühikesi = 0
+
+while True:
+    rida = input("Sisesta rida (tühi = lõpp): ")
+    if rida == "":
+        break
+
+    kokku = kokku + 1
+    rida = rida.strip()
+
+    if rida == "":
+        tühje = tühje + 1
+    elif len(rida) < 5:
+        lühikesi = lühikesi + 1
+
+print("Ridu kokku:", kokku)
+print("Tühje ridu:", tühje)
+print("Lühikesi ridu (<5 tähemärki):", lühikesi)
