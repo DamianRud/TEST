@@ -1,0 +1,90 @@
+N = int(input("Sisestage arvude kogus N: "))
+
+negatiivsed = 0
+positiivsed = 0
+nullid = 0
+
+i = 0
+while i < N:
+    x = float(input("Sisestage arv #" + str(i + 1) + ": "))
+    if x < 0:
+        negatiivsed += 1
+    elif x > 0:
+        positiivsed += 1
+    else:
+        nullid += 1
+    i += 1
+
+print("Negatiivsete arvude arv:", negatiivsed)
+print("Positiivsete arvude arv:", positiivsed)
+print("Nullide arv:", nullid)
+
+
+
+
+A = int(input("Sisestage A: "))
+B = int(input("Sisestage B: "))
+K = int(input("Sisestage K: "))
+
+i = A
+while i <= B:
+    if i % K == 0:
+        print(i)
+    i += 1
+
+
+
+
+
+
+print("Toll -> Sentimeetrid")
+
+i = 1
+while i <= 20:
+    cm = i * 2.5
+    print(i, "tolli =", cm, "cm")
+    i += 1
+
+
+
+
+
+
+
+
+S = float(input("Sisestage hoiustatud summa S eurodes: "))
+N = int(input("Sisestage aastate arv N: "))
+
+intress = 0.03  # 3%
+lõppsumma = S * (1 + intress * N)
+
+print("Lõppsumma pärast", N, "aastat on:", lõppsumma, "eurot")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+paaride_arv = 10
+
+i = 0
+while i < paaride_arv:
+    a = float(input("Sisestage esimene arv paarist #" + str(i+1) + ": "))
+    b = float(input("Sisestage teine arv paarist #" + str(i+1) + ": "))
+    
+    if a > b:
+        print("Suurem arv on:", a)
+    elif b > a:
+        print("Suurem arv on:", b)
+    else:
+        print("Arvud on võrdsed:", a)
+    
+    i += 1
