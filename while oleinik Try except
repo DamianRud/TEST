@@ -1,0 +1,118 @@
+#from  random import *
+#p=randint(2,10)
+#print(f"sõbrade arv: {p}")
+#pitsa_hind=12,90
+#hind_jootrahaga=1.1*pitsa_hind
+#maksumus=hind_jootrahaga/p
+#print(f"iga sõber peab maksma: {maksumus:.2f}")
+#print(f"iga sõber maksab:{round(maksumus,2)}$")
+
+
+
+while True:
+    try:
+        a=int(input("Sisesta kolmnurga a külje paikus:"))
+        break
+    except:
+        print("Viga palun sisesta täisarv!")
+
+
+while True:
+    try:
+        b=int(input("Sisesta kolmnurga b külje paikus:"))
+        break
+    except:
+        print("Viga palun sisesta täisarv!")
+
+
+
+while True:
+    try:
+        c=int(input("Sisesta kolmnurga c külje paikus:"))
+        break
+    except:
+        print("Viga palun sisesta täisarv!")
+
+if a>0 and b>0 and c>0:
+    print("kõik kuljed on positiivsed")
+    print("Kontrollime kas nad on ühe kolmnurga küljed")
+    if a+b>c and a+c>b and b+c>a:
+        print("Jah need on ühe kolmnurga küljed")
+        p=a+b+c 
+        print(f"Kolmnurga ümbermõõt on:{p}")
+    else:
+        print("Ei,sellist kolmnurka ei saa olemas olla")
+
+print("Lõpp")
+
+
+
+#t_arvud=0
+#for i in range(15):
+#    arv=input("Sisesta arv")
+#    try:
+#        int_arv=int(arv)
+#        print(arv,"arv in täisvara")
+#        t_arvud+=1
+#    except ValueError:
+#        print(arv,"ei ole täisvara")
+#print("sisestatud",arv "täisvara")
+
+
+
+#t_arvud=0
+#while t_arvud<(15):
+#    arv=input("Sisesta arv")
+#    try:
+#        int_arv=int(arv)
+#        print(arv,"arv in täisvara")
+#        t_arvud+=1
+#    except ValueError:
+#        print(arv,"ei ole täisvara")
+#print("sisestatud",arv "täisvara")
+
+
+
+#count=0
+#t_arvud=0
+#while count<=15:
+#    arv=input("Sisesta arv")
+#    try:
+#        int_arv=int(arv)
+#        print(arv,"arv on täisarv")
+ #       t_arvud+=1
+ #   except ValueError:
+ #       print(arv,"ei ole täisarv")
+ #       count+=1
+#print("sisestatud",arv "täisarvu")
+
+
+
+#summa=0
+#while True:
+#    try:
+#        a=int(input("Sisesta arv:"))
+#        if a>0:
+ #           print("Arv on naturaale")
+ #           break
+ #    except valuError:
+  #       print("Arv ei ole naturaalne")
+
+
+#for i in range(1,a+1):
+#    summa+=i
+#    print("Summa on ",summa)
+
+
+import random 
+N=random.randit(2,10)
+for i in range(n):
+    while True:
+        try:
+            arv=int(input("sisesta suvaline arv:"))
+        except:
+            print("Palun sisesta korrektne arv!")
+        if arv<0:
+            summa+=arv
+
+print("nigatiivsete arvud
