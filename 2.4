@@ -1,0 +1,113 @@
+import math
+
+print("Добро пожаловать в практическую работу 2.4!")
+
+# -------------------------
+# Задание 1 — M-Dog
+# -------------------------
+print("\nЗадание 1: M-Dog")
+try:
+    a = int(input("Введите первое число: "))
+    b = int(input("Введите второе число: "))
+    op = input("Введите операцию (+, -, *, /, **, //, %): ")
+
+    if op == "+":
+        result = a + b
+    elif op == "-":
+        result = a - b
+    elif op == "*":
+        result = a * b
+    elif op == "/":
+        if b != 0:
+            result = a // b
+        else:
+            result = 0
+            print("Ошибка: деление на ноль")
+    elif op == "**":
+        result = a ** b
+    elif op == "//":
+        result = a // b
+    elif op == "%":
+        result = a % b
+    else:
+        result = 0
+        print("Неизвестная операция")
+
+    if result > 0:
+        print("Результат: " + "ау-" * result)
+    else:
+        print("Результат: тишина...")
+
+except ValueError:
+    print("Ошибка: введите корректные числа")
+
+# -------------------------
+# Задание 2 — Температура
+# -------------------------
+print("\nЗадание 2: Температура")
+choice = input("Выберите направление преобразования (C → F / F → C) [C/F]: ").upper()
+
+try:
+    temp = float(input("Введите температуру => "))
+
+    if choice == "C":
+        f = temp * 9 / 5 + 32
+        print("Температура в °F: " + str(round(f, 2)))
+    elif choice == "F":
+        c = (temp - 32) * 5 / 9
+        print("Температура в °C: " + str(round(c, 2)))
+    else:
+        print("Неверный выбор")
+
+except ValueError:
+    print("Ошибка: введите число")
+
+# Дополнение: воспринимаемая температура
+try:
+    print("\nВвод для расчета воспринимаемой температуры:")
+    T = float(input("Температура (°C) => "))
+    Ws = float(input("Скорость ветра (м/с) => "))
+    RH = float(input("Влажность (%) => "))
+
+    perceived = T + (0.33 * (RH / 100 * 6.105 * math.exp(17.27 * T / (237.7 + T)))) - (0.70 * Ws) - 4
+    print("Воспринимаемая температура: " + str(round(perceived, 1)) + " °C")
+
+except ValueError:
+    print("Ошибка ввода данных")
+
+# -------------------------
+# Задание 3 — Эстонский личный код
+# -------------------------
+print("\nЗадание 3: Личный код Эстонии (isikukood)")
+personalidentitycode = input("Введите личный код (11 цифр) => ").strip()
+
+if len(personalidentitycode) == 11 and personalidentitycode.isdigit():
+    first = int(personalidentitycode[0])
+
+    # Определение пола
+    if first % 2 == 0:
+        gender = "Женщина"
+    else:
+        gender = "Мужчина"
+
+    # Определение века
+    if first in [1, 2]:
+        year_prefix = 1800
+    elif first in [3, 4]:
+        year_prefix = 1900
+    elif first in [5, 6]:
+        year_prefix = 2000
+    else:
+        year_prefix = 0  # невалидный код
+
+    year = year_prefix + int(personalidentitycode[1:3])
+    month = int(personalidentitycode[3:5])
+    day = int(personalidentitycode[5:7])
+
+    if 1 <= month <= 12 and 1 <= day <= 31:
+        print("Пол: " + gender)
+        print("Дата рождения: " + str(day) + "." + str(month) + "." + str(year))
+    else:
+        print("Ошибка: некорректный день или месяц")
+else:
+    print("Ошибка: личный код должен содержать 11 цифр")
