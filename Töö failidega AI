@@ -1,0 +1,212 @@
+import os
+from datetime import datetime
+import module  # твой модуль с функциями
+
+# -------------------------------
+# При запуске показываем типы файлов
+# -------------------------------
+print("Praegune kataloog:", os.getcwd())
+
+failid = os.listdir(os.getcwd())
+laiendid = set()
+for fail in failid:
+    if "." in fail:
+        laiendid.add(fail.split(".")[-1])
+
+print("Leitud failitüübid:", laiendid)
+
+# -------------------------------
+# Создаём каталог для отчётов (если нужно)
+# -------------------------------
+module.loo_raporti_kataloog()
+
+# -------------------------------
+# Меню
+# -------------------------------
+while True:
+    print("\n" + "-"*30)
+    print("1 - Täielik analüüs")
+    print("2 - Salvesta raport faili")
+    print("3 - Puhasta raportid")
+    print("4 - Otsi failid algustähe järgi")
+    print("0 - Välju")
+    print("-"*30)
+
+    valik = input("Vali tegevus: ")
+
+    # ---------------------------
+    # 1. Полный анализ
+    # ---------------------------
+    if valik == "1":
+        laiend = input("Sisesta faili laiend (nt py, txt): ")
+        failid = module.leia_projektifailid(laiend)
+        if not failid:
+            print("Faile ei leitud.")
+        else:
+            for fail in failid:
+                module.analuusi_faili_sisu(fail)
+
+    # ---------------------------
+    # 2. Сохранение отчёта в файл
+    # ---------------------------
+    elif valik == "2":
+        laiend = input("Sisesta faili laiend raporti jaoks (nt py, txt): ")
+        failid = module.leia_projektifailid(laiend)
+
+        if not failid:
+            print("Faile ei leitud.")
+        else:
+            # создаём папку на всякий случай
+            module.loo_raporti_kataloog()
+
+            # имя файла отчёта с текущей датой и временем
+            kuupaev = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+            raporti_nimi = os.path.join("Analüüsi_Raportid", "raport_" + kuupaev + ".txt")
+
+            with open(raporti_nimi, "w", encoding="utf-8") as raport:
+                for fail in failid:
+                    kokku = 0
+                    tuhjad = 0
+                    marksona = 0
+
+                    # читаем файл и считаем статистику
+                    with open(fail, "r", encoding="utf-8") as f:
+                        for rida in f:
+                            kokku += 1
+                            if rida.strip() == "":
+                                tuhjad += 1
+                            marksona += rida.count("TODO")
+                            marksona += rida.count("FIXME")
+
+                    # записываем данные в файл
+                    raport.write("Fail: " + fail + "\n")
+                    raport.write("Kokku ridu: " + str(kokku) + "\n")
+                    raport.write("Tühje ridu: " + str(tuhjad) + "\n")
+                    raport.write("TODO ja FIXME kokku: " + str(marksona) + "\n")
+                    raport.write("-" * 30 + "\n")
+
+            print("Raport salvestatud:", raporti_nimi)
+
+    # ---------------------------
+    # 3. Очистка журналов
+    # ---------------------------
+    elif valik == "3":
+        kataloog = "Analüüsi_Raportid"
+        if os.path.exists(kataloog):
+            failid = os.listdir(kataloog)
+            for fail in failid:
+                # удаляем только файлы отчётов, которые начинаются с 'raport_'
+                if fail.startswith("raport_") and fail.endswith(".txt"):
+                    os.remove(os.path.join(kataloog, fail))
+            print("Kõik raportid eemaldatud.")
+        else:
+            print("Raporti kataloog puudub.")
+
+    # ---------------------------
+    # 4. Поиск файлов по первой букве
+    # ---------------------------
+    elif valik == "4":
+        taht = input("Sisesta algustäht: ")
+        failid = module.leia_failid_algustahega(taht)
+        if not failid:
+            print("Faile ei leitud.")
+        else:
+            print("Leitud failid:", failid)
+
+    # ---------------------------
+    # 0. Выход
+    # ---------------------------
+    elif valik == "0":
+        print("Programm lõpetatud.")
+        break
+
+    else:
+        print("Vale valik!")
+
+
+
+
+
+
+
+
+
+import glob
+import os
+from datetime import datetime
+
+
+# ===============================
+# 1. Поиск файлов по расширению
+# ===============================
+# ИЗМЕНЕНО:
+# - убран input() из функции
+# - используется параметр asukoht
+# - убран код после return
+# - БЕЗ f-строк
+
+def leia_projektifailid(laiend, asukoht="."):
+    if not laiend.startswith("."):
+        laiend = "." + laiend
+
+    muster = os.path.join(asukoht, "*" + laiend)
+    failid = glob.glob(muster)
+    return failid
+
+
+# ===============================
+# 2. Создание каталога для отчётов
+# ===============================
+# ЭТА ФУНКЦИЯ БЫЛА ПРАВИЛЬНОЙ
+# ничего не менял
+
+def loo_raporti_kataloog(nimi="Analüüsi_Raportid"):
+    if not os.path.exists(nimi):
+        os.mkdir(nimi)
+        return True
+    return False
+
+
+# ===============================
+# 3. Поиск файлов по первой букве
+# ===============================
+# ИЗМЕНЕНО:
+# - убран input() из функции
+# - используется аргумент
+# - БЕЗ f-строк
+
+def leia_failid_algustahega(taht):
+    muster = taht + "*.*"
+    return glob.glob(muster)
+
+
+# ===============================
+# 4. Анализ содержимого файла
+# ===============================
+# ИЗМЕНЕНО:
+# - файл теперь ОТКРЫВАЕТСЯ
+# - анализ идёт по строкам файла
+# - TODO и FIXME считаются в ЛЮБОЙ строке
+# - результат выводится через print()
+# - НЕТ словаря и return
+
+def analuusi_faili_sisu(failitee):
+    kokku_ridu = 0
+    tuhje_ridu = 0
+    marksona = 0
+
+    with open(failitee, "r", encoding="utf-8") as f:
+        for rida in f:
+            kokku_ridu += 1
+
+            if rida.strip() == "":
+                tuhje_ridu += 1
+
+            marksona += rida.count("TODO")
+            marksona += rida.count("FIXME")
+
+    print("Fail:", failitee)
+    print("Kokku ridu:", kokku_ridu)
+    print("Tühje ridu:", tuhje_ridu)
+    print("TODO ja FIXME kokku:", marksona)
+    print("-" * 30)
