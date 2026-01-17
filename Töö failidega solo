@@ -1,0 +1,182 @@
+# user=input("Введите текст:")
+#
+# file=open("text.txt","a")
+#
+# file.write(user+"\n")
+#
+#
+# file.close()
+
+
+
+
+
+
+# file=open("text.txt","r")
+#
+# #print(file.read())
+#
+# for line in file:
+#     print(line)
+#
+#
+#
+#
+# file.close()
+
+
+
+
+
+
+
+
+#
+# with open('text.txt', 'r') as f:
+#     print(f.read())
+
+
+
+# def Loe_failist(fail: str) -> list:
+#     f = open(fail, 'r', encoding="utf-8-sig")
+#     jarjend = []
+#     for text in f:
+#         jarjend.append(text.strip())
+#     f.close()
+#     return jarjend
+#
+#
+# result = Loe_failist("text.txt")
+# print(result)
+
+
+
+
+# def Kirjuta_failisse(fail: str, jarjend: list):
+#     with open(fail, 'w', encoding="utf-8-sig") as f:
+#         for line in jarjend:
+#             f.write(line + '\n')
+#
+# # Пример данных для записи
+# andmed = ["apple", "banana", "orange"]
+#
+# # Вызов функции
+# Kirjuta_failisse("text.txt", andmed)
+#
+# # Проверка результата
+# print("Файл записан успешно!")
+
+
+
+
+
+# import os
+# f = open('text.txt', 'r')
+# print(dir(f))
+# f.close()
+
+
+
+# import glob
+#
+# # Находит все файлы в текущей папке, имена которых заканчиваются на .txt.
+# txt_failid = glob.glob('*.txt')
+# print("Leitud tekstifailid:", txt_failid)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#мое
+# with open("text.txt","w", encoding="utf-8")as f:
+#     print(f.write("Annan\n Boris\n Maria\n"))
+
+
+#Deep seek
+# with open("text.txt","w",encoding="utf-8") as f:
+#     f.write("Anna\n")
+#     f.write("Boris\n")
+#     f.write("Maria\n")
+# print("Файл успешно создан text.txt")
+
+
+
+
+#С командой readlines ['Anna\n', 'Boris\n', 'Maria\n']
+# with open("text.txt","r",encoding="utf-8") as f:
+#     lines=f.readlines()# получаем список строк
+#     print(lines)  ['Anna\n', 'Boris\n', 'Maria\n']
+
+
+
+# with open("text.txt","r",encoding="utf-8") as f:
+#     for line in f:#читаем по одной строке
+#         print(line)# Anna
+
+                    #Boris
+
+                    #Maria
+
+
+# with open("text.txt", "r", encoding="utf-8") as f:
+#     text = f.read(5)   # читаем первые 5 символов
+#     print(text)
+
+
+
+# try:
+#     with open("text.txt", "r", encoding="utf-8") as f:
+#         for i, line in enumerate(f, start=1):
+#             print(str(i) + ". " + line.strip())
+# except FileNotFoundError:
+#     print("Ошибка: файл text.txt не найден")
+#     print("Сначала выполни задание 1")
+
+
+# СОЗДАЁМ ФАЙЛ С ИМЕНАМИ
+with open('tetx.txt', 'w', encoding='utf-8') as f:
+    f.write('Анна\n')
+    f.write('Борис\n')
+    f.write('Мария\n')
+    
+
+print("Файл 'tetx.txt' создан!")
+
+# ПРОГРАММА ПОДСЧЁТА СТАТИСТИКИ
+try:
+    with open('tetx.txt', 'r', encoding='utf-8') as file:  # ← ИЗМЕНИЛИ ЗДЕСЬ!
+        lines = file.readlines()
+
+        line_count = 0
+        word_count = 0
+        chars_no_spaces = 0
+        all_chars = 0
+
+        for line in lines:
+            line_count += 1
+
+            words = line.split()
+            word_count += len(words)
+
+            clean_line = line.strip()
+            chars_no_spaces += len(clean_line)
+
+            all_chars += len(line)
+
+        print("=== Статистика файла 'tetx.txt' ===")  # ← И ЗДЕСЬ!
+        print("Строк:", line_count)
+        print("Слов:", word_count)
+        print("Букв (без пробелов):", chars_no_spaces)
+        print("Всех символов (с \\n):", all_chars)
+
+except FileNotFoundError:
+    print("Файл 'tetx.txt' не найде
