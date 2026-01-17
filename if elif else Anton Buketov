@@ -1,0 +1,61 @@
+#näide 1
+#age = int(input("sisesta vanus"))
+#if age >= 18:
+   # text = "sa oled täiskasvane"
+#else:
+   # text = "sa oled liiga noor"
+    
+#print(text)
+
+#näide 2
+
+#arvKontrolimiseks = int(input("sisesta arv"))
+#if arvKontrolimiseks % 2:
+   # print("paaritu arv")
+#else:
+    #print("paaris arv")
+    
+    
+#arv = int(input("sisesta punktid"))
+#tulemus = 0
+#if arv<60:
+    #tulemus = "D"
+#else:
+    #if arv >74:
+        #if arv>89:
+            #tulemus = "A"
+        #else:
+            #tulemus = "B"
+    #else:
+        #tulemus = "C"
+#print("Teie tulemus;",tulemus)
+
+#a =int(input("sisesta arv A"))
+#b =int(input("sisesta arv B"))
+#c =int(input("sisesta arv C"))
+
+#if(a>b):
+    #if a>c:
+        #print(a)
+    #else:
+       #print(C)  
+#else:
+    #if b>c:
+       # print(b)
+   # else:
+        #print(C)
+  
+
+
+
+   # andmetüüp
+# muutujad
+
+
+# arv1=int(input("sisesta arv1:"))
+# arv2=int(input("sisesta arv2:"))
+# tulemus = arv1 + arv2
+# print("text")
+
+#ülesandeid 1
+ghggg
