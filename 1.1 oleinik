@@ -1,0 +1,143 @@
+import math
+import random
+
+# =========================
+# Ülesanne 1 — Hello, world!
+# =========================
+print("Tere, maailm!")
+
+name = input("Sisesta oma nimi: ")
+print("Tere, maailm! Tere, " + name)
+
+try:
+    age = int(input("Kui vana sa oled? "))
+    print("Tere, maailm! Tere, " + name + "! Sul on " + str(age) + " aastat.")
+except ValueError:
+    print("Viga: vanus peab olema arv.")
+
+# =========================
+# Ülesanne 2 — Muutujate tüübid
+# =========================
+age_var = 18
+name_var = "Jaak"
+length = 16.5
+is_going_to_school = True
+
+print(type(age_var))                # int
+print(type(name_var))               # str
+print(type(length))                 # float
+print(type(is_going_to_school))    # bool
+
+# Näide False väärtuse määramisest
+is_going_to_school = False
+print(is_going_to_school)
+
+# =========================
+# Ülesanne 3 — Kommide arv
+# =========================
+candies = random.randint(10, 50)
+print("Laual on komme:", candies)
+
+try:
+    taken = int(input("Mitu kommi sa tahad võtta? "))
+    if taken > candies:
+        print("Sa ei saa võtta rohkem komme kui laual on!")
+    else:
+        candies -= taken
+        print("Jäänud kommide arv:", candies)
+except ValueError:
+    print("Viga: sisesta täisarv.")
+
+# =========================
+# Ülesanne 4 — Puudiameeter
+# =========================
+try:
+    circumference = float(input("Sisesta puu ümbermõõt: "))
+    diameter = circumference / math.pi
+    print("Puu läbimõõt on:", diameter)
+except ValueError:
+    print("Viga: sisesta arv.")
+
+# =========================
+# Ülesanne 5 — Ristkülikukujulise maatüki diagonaal
+# =========================
+try:
+    N = float(input("Sisesta maatüki pikkus N (m): "))
+    M = float(input("Sisesta maatüki laius M (m): "))
+    diagonal = math.sqrt(N**2 + M**2)
+    print("Maatüki diagonaal on:", diagonal)
+except ValueError:
+    print("Viga: sisesta arv.")
+
+# =========================
+# Ülesanne 6 — Kiirus
+# =========================
+try:
+    time = float(input("Mitu tundi kestis sõit? "))
+    distance = float(input("Mitu kilomeetrit sa sõitsid? "))
+    speed = distance / time
+    print("Sinu kiirus oli " + str(speed) + " km/h")
+except ValueError:
+    print("Viga: sisesta arv.")
+except ZeroDivisionError:
+    print("Viga: aeg ei saa olla null.")
+
+# =========================
+# Ülesanne 7 — Keskmine ja jagamine
+# =========================
+try:
+    a = int(input("Sisesta arv 1: "))
+    b = int(input("Sisesta arv 2: "))
+    c = int(input("Sisesta arv 3: "))
+    d = int(input("Sisesta arv 4: "))
+    e = int(input("Sisesta arv 5: "))
+
+    sum_numbers = a + b + c + d + e
+    average = sum_numbers / 5
+    print("Arvude keskmine:", average)
+
+    divider = int(input("Millise arvuga jagame summat? "))
+    quotient = sum_numbers // divider
+    remainder = sum_numbers % divider
+    print("Terve osa:", quotient)
+    print("Jääk:", remainder)
+except ValueError:
+    print("Viga: sisesta täisarvud.")
+except ZeroDivisionError:
+    print("Viga: nulliga jagada ei saa.")
+
+# =========================
+# Ülesanne 8 — Konn
+# =========================
+print("  @..@")
+print(" (----)")
+print(" ( \\__/ )")
+print('^^ "" ^^')
+
+# =========================
+# Ülesanne 9 — Kolmnurga ümbermõõt
+# =========================
+try:
+    a = int(input("Sisesta külg a: "))
+    b = int(input("Sisesta külg b: "))
+    c = int(input("Sisesta külg c: "))
+    perimeter = a + b + c
+    print("Kolmnurga ümbermõõt on:", perimeter)
+except ValueError:
+    print("Viga: sisesta täisarvud.")
+
+# =========================
+# Ülesanne 10 — Pitsa ja jootraha
+# =========================
+pizza_cost = 12.90
+tip = pizza_cost * 0.10
+total = pizza_cost + tip
+
+try:
+    people = int(input("Mitu inimest jagavad pitsa? "))
+    per_person = total / people
+    print("Igaüks peab maksma:", per_person)
+except ValueError:
+    print("Viga: sisesta täisarv.")
+except ZeroDivisionError:
+    print("Viga: inimeste arv ei saa olla null.")
