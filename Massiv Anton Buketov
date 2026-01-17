@@ -1,0 +1,73 @@
+
+# масив начинаеться с 0- 0 1 2 3 4 5 6 index
+#arv=["tere",33,"nimi","on",11,"anton","kool","tthk","auto",5.5]
+#print(arv[0])
+#print(arv[-1])
+#print(arv[len(arv)-1])
+#print(arv[len(arv)//2])
+
+#print(arv[0])
+#print(arv[1])
+#print(arv[2])
+
+
+
+#for i in range(0,len(arv)):
+#    if i==5:
+#        continue
+#    else:
+#       print(arv[i])
+        
+        
+    
+#firstElements=arv[0:4]
+#elements=arv[len(arv)//2:]
+#print(elements)
+#print(arv[-3:])
+#начало конец шаг
+#print(arv[-1::-1])
+
+
+
+#arv.append("uus")
+#print(arv)
+
+#arv=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+#oddvarr=[]
+#evebArr=[]
+
+#for n in range(0,len(arv)):
+#    if arv[n]% 2== 0:
+ #       evebArr.append(arv[n])
+ #   else:
+ #       oddvarr.append(arv[n])
+        
+        
+#print(oddvarr)
+#print(evebArr)
+
+#arv.remove("Anton")
+#print(arv)
+        
+
+
+
+
+
+
+
+basket=['milk','bread','eggs','chees','bannans','orange']
+#basket.append('butter')
+
+#arv=[]
+#arv.append('tea')
+#basket=arv+basket
+#print(basket)
+#basket.insert(2, 'sugar')
+#print(basket)
+
+
+for elem in basket[:]:
+    if len(elem) > 4:
+        basket.remove(elem)
+print(basket)
