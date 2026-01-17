@@ -1,0 +1,100 @@
+import math
+import random
+
+# =========================
+# Квадрат
+# =========================
+print("Ruudu omadused")  # Вывод заголовка
+
+# Ввод длины стороны квадрата с проверкой
+while True:
+    try:
+        ruudu_kylg = float(input("Sisesta ruudu külje pikkus => "))  # Запрос длины стороны
+        break
+    except ValueError:
+        print("Viga: sisesta arv")  # Ошибка при некорректном вводе
+
+# Площадь квадрата
+ruudu_pindala = ruudu_kylg ** 2
+print("Ruudu pindala:", ruudu_pindala)
+
+# Периметр квадрата
+ruudu_umbermoot = 4 * ruudu_kylg
+print("Ruudu ümbermõõt:", ruudu_umbermoot)
+
+# Диагональ квадрата
+ruudu_diagonaal = ruudu_kylg * math.sqrt(2)
+print("Ruudu diagonaal:", round(ruudu_diagonaal, 2))
+print()
+
+# =========================
+# Прямоугольник
+# =========================
+print("Ristküliku omadused")  # Заголовок
+
+# Ввод сторон прямоугольника с проверкой
+while True:
+    try:
+        ristkylik_a = float(input("Sisesta ristküliku esimene külg => "))  # Первая сторона
+        ristkylik_b = float(input("Sisesta ristküliku teine külg => "))  # Вторая сторона
+        break
+    except ValueError:
+        print("Viga: sisesta arv")  # Ошибка при вводе
+
+# Площадь прямоугольника
+ristkylik_pindala = ristkylik_a * ristkylik_b
+print("Ristküliku pindala:", ristkylik_pindala)
+
+# Периметр прямоугольника
+ristkylik_umbermoot = 2 * (ristkylik_a + ristkylik_b)
+print("Ristküliku ümbermõõt:", ristkylik_umbermoot)
+
+# Диагональ прямоугольника
+ristkylik_diagonaal = math.sqrt(ristkylik_a ** 2 + ristkylik_b ** 2)
+print("Ristküliku diagonaal:", round(ristkylik_diagonaal, 2))
+print()
+
+# =========================
+# Круг
+# =========================
+print("Ringi omadused")  # Заголовок
+
+# Ввод радиуса круга с проверкой
+while True:
+    try:
+        ring_raadius = float(input("Sisesta ringi raadius => "))  # Радиус
+        break
+    except ValueError:
+        print("Viga: sisesta arv")  # Ошибка при вводе
+
+# Диаметр круга
+ring_diameeter = 2 * ring_raadius
+print("Ringi diameeter:", ring_diameeter)
+
+# Площадь круга
+ring_pindala = math.pi * ring_raadius ** 2
+print("Ringi pindala:", round(ring_pindala, 2))
+
+# Длина окружности
+ring_umbermoot = 2 * math.pi * ring_raadius
+print("Ringi ümbermõõt:", round(ring_umbermoot, 2))
+print()
+
+# =========================
+# Конфеты (пример использования random)
+# =========================
+kommid = random.randint(10, 50)
+print("Laual on komme:", kommid)  # Количество конфет
+
+# Пользователь убирает конфеты
+while True:
+    try:
+        voetud = int(input("Mitu kommi sa tahad võtta? "))
+        if voetud > kommid:
+            print("Sa ei saa võtta rohkem komme kui laual on!")  # Проверка
+        else:
+            kommid -= voetud
+            print("Jäänud kommide arv:", kommid)
+            break
+    except ValueError:
+        print("Viga: sisesta täisarv")  # Ошибка при вводе
