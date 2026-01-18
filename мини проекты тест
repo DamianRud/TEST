@@ -660,7 +660,181 @@ print(sentence)  # "Это пример предложения"
 
 
 
+1️⃣ Анализ списка чисел
 
+Задание: сумма, среднее, положительные и отрицательные
+
+nums = input("Введите числа через пробел: ").split()
+numbers = []
+
+for n in nums:
+    numbers.append(int(n))
+
+total = sum(numbers)
+avg = total / len(numbers)
+
+pos = 0
+neg = 0
+
+for n in numbers:
+    if n > 0:
+        pos += 1
+    elif n < 0:
+        neg += 1
+
+print("Сумма:", total)
+print("Среднее:", avg)
+print("Положительных:", pos)
+print("Отрицательных:", neg)
+
+2️⃣ Проверка корректности ввода числа
+try:
+    n = int(input("Введите число: "))
+    if n > 0 and n % 2 == 0:
+        print("Положительное и чётное")
+    else:
+        print("Не подходит под условия")
+except:
+    print("Ошибка ввода")
+
+3️⃣ Частотный анализ символов (словарь)
+text = input("Введите строку: ")
+freq = {}
+
+for ch in text:
+    if ch in freq:
+        freq[ch] += 1
+    else:
+        freq[ch] = 1
+
+for key in freq:
+    print(key, ":", freq[key])
+
+4️⃣ Телефонная книга (словарь + меню)
+phonebook = {}
+
+while True:
+    print("1 - Добавить")
+    print("2 - Найти")
+    print("3 - Удалить")
+    print("4 - Выход")
+
+    choice = input("Выбор: ")
+
+    if choice == "1":
+        name = input("Имя: ")
+        phone = input("Телефон: ")
+        phonebook[name] = phone
+
+    elif choice == "2":
+        name = input("Имя: ")
+        if name in phonebook:
+            print(phonebook[name])
+        else:
+            print("Нет такого контакта")
+
+    elif choice == "3":
+        name = input("Имя: ")
+        if name in phonebook:
+            del phonebook[name]
+            print("Удалено")
+        else:
+            print("Нет такого контакта")
+
+    elif choice == "4":
+        break
+
+5️⃣ Фильтрация чисел
+nums = input("Введите числа: ").split()
+numbers = []
+
+for n in nums:
+    numbers.append(int(n))
+
+even = []
+odd = []
+
+for n in numbers:
+    if n % 2 == 0:
+        even.append(n)
+    else:
+        odd.append(n)
+
+print("Чётные:", even)
+print("Нечётные:", odd)
+
+6️⃣ Проверка корректности даты
+def is_leap(year):
+    return year % 4 == 0 and year % 100 != 0 or year % 400 == 0
+
+def valid_date(day, month, year):
+    if month < 1 or month > 12:
+        return False
+
+    days = [31, 28 + is_leap(year), 31, 30, 31, 30,
+            31, 31, 30, 31, 30, 31]
+
+    if day < 1 or day > days[month - 1]:
+        return False
+
+    return True
+
+d = int(input("День: "))
+m = int(input("Месяц: "))
+y = int(input("Год: "))
+
+print(valid_date(d, m, y))
+
+7️⃣ Генератор чисел + анализ
+import random
+
+numbers = []
+
+for i in range(10):
+    numbers.append(random.randint(1, 100))
+
+print(numbers)
+print("Минимум:", min(numbers))
+print("Максимум:", max(numbers))
+
+8️⃣ Статистика по тексту
+text = input("Введите текст: ")
+
+words = text.split()
+longest = words[0]
+
+for w in words:
+    if len(w) > len(longest):
+        longest = w
+
+print("Длина строки:", len(text))
+print("Количество слов:", len(words))
+print("Самое длинное слово:", longest)
+
+9️⃣ Проверка пароля (без регистрации)
+password = input("Введите пароль: ")
+
+has_digit = False
+has_lower = False
+has_upper = False
+has_special = False
+
+specials = "!@#$%^&*()_+-="
+
+for ch in password:
+    if ch.isdigit():
+        has_digit = True
+    elif ch.islower():
+        has_lower = True
+    elif ch.isupper():
+        has_upper = True
+    elif ch in specials:
+        has_special = True
+
+if has_digit and has_lower and has_upper and has_special:
+    print("Пароль надёжный")
+else:
+    print("Пароль слабый")
 
 
 
