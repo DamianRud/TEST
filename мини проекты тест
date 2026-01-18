@@ -47,4 +47,578 @@ calculator()
 
 
 
+банкомат
+ balance=5000
+# password="1111"
+# while True:
+#     user_password=input("Введите пароль")
+#     if user_password==password:
+#         print("Добро пожаловать в Сбер-банк")
+#         break
+#     else:
+#         print("Не правильный пароль попробуйте еще")
+# while True:
+#     print("Добро пожаловать")
+#     print("1.Посмотреть баланс")
+#     print("2.снять деньги ")
+#     print("3.положить деньги")
+#     print("4.выйти")
+#
+#     user=input("Выберите действие (1-4)")
+#
+#     if user=="1":
+#         print("Ваш баланс",balance,"Рублей")
+#     elif user=="2":
+#         user=int(input("Сколько денег вы хотите снять"))
+#         if user>balance:
+#             print("Не достаточно денег")
+#         else:
+#             balance-=user
+#             print("Снято",user,"Баланс",balance)
+#     elif user=="3":
+#         user=int(input("Сколько положить рублей"))
+#         balance+=user
+#         print("Положено",user,"Остаток",balance)
+#     elif user=="4":
+#         print("Выход")
+#         break
+#
+#     else:
+#         print("Не верная опирация")
+
+
+
+
+
+
+
+
+
+
+игра угадай число
+
+import random
+# user=0
+# attempts = 0
+# secret = random.randint(1, 10)
+#
+# while user != secret and attempts < 5:
+#    user = int(input("Введи число: "))
+#    attempts += 1
+#
+#    if user == secret:
+#        print("Ты победил! за",attempts)
+#        break
+#    elif user > secret:
+#        print("Слишком много")
+#    elif user < secret:
+#        print("Слишком мало")
+#
+# else:
+#    print("Ты проиграл :(")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+игра камень ножницы бумага
+
+# import random
+#
+# games_played = 0
+# wins = 0
+# losses = 0
+# options = ["камень", "ножницы", "бумага"]
+#
+# while True:
+#     print("---Добро пожаловать в игру---")
+#     print("Выберите действие")
+#     print("1.камень")
+#     print("2.Ножницы")
+#     print("3.Бумага")
+#     print("4.Выход")
+#
+#     try:
+#         user = input("Введи действие")
+#         if user == "4":
+#             print("Пока")
+#             break
+#
+#         if user not in ["1", "2", "3"]:
+#             print("Неверный выбор!")
+#             continue
+#
+#         computer = random.choice(["1", "2", "3"])
+#         games_played += 1
+#
+#         if user == "1" and computer == "1":
+#             print("Ничья Камень на Камень")
+#         elif user == "1" and computer == "2":
+#             print("Человек победил камень выигрывает ножницы")
+#             wins += 1
+#         elif user == "1" and computer == "3":
+#             print("Компьютер победил")
+#             losses += 1
+#
+#         if user == "2" and computer == "2":
+#             print("Ничья ножницы на ножницы")
+#         elif user == "2" and computer == "1":
+#             print("Компьютер победил Камень бьет ножницы")
+#             losses += 1
+#         elif user == "2" and computer == "3":
+#             print("Человек победил ")
+#             wins += 1
+#
+#         if user == "3" and computer == "3":
+#             print("Ничья Бумага на Бумагу")
+#         elif user == "3" and computer == "2":
+#             print("Компьютер победил Ножницы режут бумагу")
+#             losses += 1
+#         elif user == "3" and computer == "1":
+#             print("Человек победил")
+#             wins += 1
+#
+#         print("Сыграно игр:", games_played, "Выиграно:", wins, "Проиграно:", losses)
+#
+#     except Exception as e:
+#         print("Произошла ошибка:", e)
+
+
+
+
+
+
+
+
+
+
+
+простое не простое число
+# def is_prime(n):
+#     if n <= 1:
+#         return False, []
+#     deliteli = []
+#
+#     for i in range(2, n):
+#         if n % i == 0:
+#             deliteli.append(i)
+#
+#     if not deliteli:
+#         return True
+#     else:
+#         return False, deliteli
+#
+# number = int(input("Введите число от 0 до 1000: "))
+# result = is_prime(number)
+#
+# if result[0] is True:
+#     print(str(number) + " — простое число")
+# else:
+#     print(str(number) + " — не простое число, его делители: " + str(result[1]))
+
+
+
+
+
+
+
+ищит среднее 
+ def average(numbers:list):
+#     if not numbers:
+#         return None
+#
+#     result=sum(numbers)/ len(numbers)
+#     return result
+#
+# numbers = [2, 5, 7, 10,10]
+# print(average(numbers))
+
+
+
+
+
+
+
+
+
+
+Работа с файлом (подсчёт строк, слов, символов)
+try:
+    file = open("text.txt", "r")
+    text = file.read()
+    file.close()
+
+    lines = text.split("\n")
+    words = text.split()
+
+    print("Строк:", len(lines))
+    print("Слов:", len(words))
+    print("Символов:", len(text))
+
+except FileNotFoundError:
+    print("Файл не найден")
+
+
+
+
+
+
+
+
+
+
+Угадай число (с проверкой)
+import random
+
+number = random.randint(1, 100)
+attempts = 0
+
+while True:
+    try:
+        guess = int(input("Введите число: "))
+        attempts += 1
+
+        if guess < number:
+            print("Больше")
+        elif guess > number:
+            print("Меньше")
+        else:
+            print("Угадал за", attempts, "попыток")
+            break
+    except:
+        print("Введите целое число")
+
+
+
+
+4️⃣ Конвертер единиц
+
+def c_to_f(c):
+    return c * 9 / 5 + 32
+
+try:
+    c = float(input("Введите температуру: "))
+    print("Фаренгейт:", c_to_f(c))
+except:
+    print("Ошибка ввода")
+
+
+
+
+
+
+
+
+
+
+
+5️⃣ Работа со списком чисел
+numbers = []
+
+try:
+    n = int(input("Сколько чисел: "))
+    for i in range(n):
+        numbers.append(int(input("Число: ")))
+
+    print("Сумма:", sum(numbers))
+    print("Максимум:", max(numbers))
+
+except:
+    print("Ошибка ввода")
+
+
+
+
+
+
+
+6️⃣ Функция + проверка (чётность)
+def is_even(n):
+    return n % 2 == 0
+
+try:
+    x = int(input("Введите число: "))
+    if is_even(x):
+        print("Чётное")
+    else:
+        print("Нечётное")
+except:
+    print("Ошибка")
+
+
+7️⃣ Блок-схемная задача (чётные числа)
+try:
+    n = int(input("Введите N: "))
+    for i in range(1, n + 1):
+        if i % 2 == 0:
+            print(i)
+except:
+    print("Ошибка ввода")
+
+
+
+
+
+
+
+
+много функциональный  TO-DO list 
+tasks = []
+
+# загрузка из файла
+try:
+    file = open("todo.txt", "r")
+    for line in file:
+        tasks.append(line.strip())
+    file.close()
+except FileNotFoundError:
+    pass
+
+
+while True:
+    print("\nМЕНЮ:")
+    print("1 - Добавить задачу (append)")
+    print("2 - Вставить задачу (insert)")
+    print("3 - Удалить по названию (remove)")
+    print("4 - Удалить по номеру (pop)")
+    print("5 - Найти индекс задачи (index)")
+    print("6 - Подсчитать одинаковые задачи (count)")
+    print("7 - Отсортировать (sort)")
+    print("8 - Развернуть список (reverse)")
+    print("9 - Очистить список (clear)")
+    print("10 - Показать список")
+    print("0 - Выход")
+
+    choice = input("Выберите действие: ")
+
+    # append
+    if choice == "1":
+        task = input("Введите задачу: ")
+        tasks.append(task)
+
+    # insert
+    elif choice == "2":
+        try:
+            task = input("Введите задачу: ")
+            pos = int(input("Введите позицию: "))
+            tasks.insert(pos - 1, task)
+        except:
+            print("Ошибка вставки")
+
+    # remove
+    elif choice == "3":
+        task = input("Введите задачу для удаления: ")
+        try:
+            tasks.remove(task)
+        except:
+            print("Такой задачи нет")
+
+    # pop
+    elif choice == "4":
+        try:
+            num = int(input("Введите номер задачи: "))
+            removed = tasks.pop(num - 1)
+            print("Удалено:", removed)
+        except:
+            print("Ошибка удаления")
+
+    # index
+    elif choice == "5":
+        task = input("Введите задачу: ")
+        try:
+            print("Индекс:", tasks.index(task))
+        except:
+            print("Задача не найдена")
+
+    # count
+    elif choice == "6":
+        task = input("Введите задачу: ")
+        print("Количество:", tasks.count(task))
+
+    # sort
+    elif choice == "7":
+        tasks.sort()
+        print("Список отсортирован")
+
+    # reverse
+    elif choice == "8":
+        tasks.reverse()
+        print("Список перевёрнут")
+
+    # clear
+    elif choice == "9":
+        tasks.clear()
+        print("Список очищен")
+
+    # show
+    elif choice == "10":
+        if len(tasks) == 0:
+            print("Список пуст")
+        else:
+            for i in range(len(tasks)):
+                print(i + 1, tasks[i])
+
+    # exit
+    elif choice == "0":
+        break
+
+    else:
+        print("Неверный выбор")
+
+
+# сохранение в файл
+file = open("todo.txt", "w")
+for task in tasks:
+    file.write(task + "\n")
+file.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(1) Простые арифметические операции
+def arithmetic(a, b, op):
+    if op == "+":
+        return a + b
+    elif op == "-":
+        return a - b
+    elif op == "*":
+        return a * b
+    elif op == "/":
+        if b == 0:
+            return "Деление на ноль"
+        return a / b
+    else:
+        return "Неизвестная операция"
+
+(2) Високосный год
+def is_year_leap(year):
+    if year % 400 == 0:
+        return True
+    if year % 100 == 0:
+        return False
+    if year % 4 == 0:
+        return True
+    return False
+
+(3) Квадрат (периметр, площадь, диагональ)
+import math
+
+def square(a):
+    perimeter = 4 * a
+    area = a * a
+    diagonal = a * math.sqrt(2)
+    return perimeter, area, diagonal
+
+(4) Времена года
+def season(month):
+    if month == 12 or month == 1 or month == 2:
+        return "зима"
+    elif month >= 3 and month <= 5:
+        return "весна"
+    elif month >= 6 and month <= 8:
+        return "лето"
+    elif month >= 9 and month <= 11:
+        return "осень"
+    else:
+        return "Неверный месяц"
+
+(5) Банковский депозит
+def bank(a, years):
+    for i in range(years):
+        a = a + a * 0.1
+    return a
+
+(6) Простое число + делители
+def is_prime(n):
+    if n < 2:
+        return False
+
+    divisors = []
+    for i in range(1, n + 1):
+        if n % i == 0:
+            divisors.append(i)
+
+    if len(divisors) == 2:
+        return True
+    else:
+        print("Делители:", divisors)
+        return False
+
+(7) Правильная дата
+def date(day, month, year):
+    if month < 1 or month > 12:
+        return False
+
+    days_in_month = [31, 28, 31, 30, 31, 30,
+                     31, 31, 30, 31, 30, 31]
+
+    if is_year_leap(year):
+        days_in_month[1] = 29
+
+    if day < 1 or day > days_in_month[month - 1]:
+        return False
+
+    return True
+
+(8) XOR-шифрование
+def XOR_cipher(text, key):
+    result = ""
+    for char in text:
+        result = result + chr(ord(char) ^ key)
+    return result
+
+
+def XOR_uncipher(text, key):
+    result = ""
+    for char in text:
+        result = result + chr(ord(char) ^ key)
+    return result
+
+
+🔹 XOR работает одинаково для шифрования и расшифровки — это часто спрашивают!
+
+(9) Среднее число
+def average(numbers):
+    if len(numbers) == 0:
+        return None
+    return sum(numbers) / len(numbers)
+
+(10) Самый маленький и самый большой
+def min_max(numbers):
+    return min(numbers), max(numbers)
+
+(11) Уникальные элементы (с сохранением порядка)
+def unique_elements(seq):
+    result = []
+    for item in seq:
+        if item not in result:
+            result.append(item)
+    return result
+
+
+
+
+
 
