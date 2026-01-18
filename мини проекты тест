@@ -838,12 +838,44 @@ else:
 
 
 
+календарь
+import calendar
+
+year = int(input("Год: "))
+month = int(input("Месяц: "))
+
+print(calendar.month(year, month))
 
 
 
 
 
+hotbar=["палка","камень","зелье","меч","щит"]
 
+index=hotbar.index("меч")
+item=hotbar.pop(index)
+hotbar.insert(0,item)
+print(hotbar)
+['меч', 'палка', 'камень', 'зелье', 'щит']
+
+
+табличка
+from prettytable import PrettyTable
+from prettytable import PrettyTable
+
+info = (
+    ("34", "Иван", "Москва"),
+    ("23", "Сергей", "Санкт-Петербург"),
+    ("30", "АлексейАлексейАлексейАлексей", "Москва"),
+    ("20", "Андрей", "Киров"),
+)
+
+table = PrettyTable(("Возраст", "Имя", "Город"))
+
+for person in info:
+    table.add_row(person)
+
+print(table)
 
 
 
