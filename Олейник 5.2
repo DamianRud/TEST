@@ -1,0 +1,145 @@
+# MyModule.py
+import random
+import string
+
+logins = []
+passwords = []
+
+def generate_password(length=12):
+    """
+    Генерирует случайный пароль длиной length.
+    Используются буквы верхнего и нижнего регистра, цифры и спецсимволы.
+    """
+    chars = string.ascii_letters + string.digits + ".,:;!_*-+()/#¤%&"
+    pswd = "".join(random.choice(chars) for _ in range(length))
+    return pswd
+
+def check_password(password):
+    """
+    Проверяет, что пароль содержит:
+    - хотя бы одну цифру
+    - хотя бы одну строчную букву
+    - хотя бы одну заглавную букву
+    - хотя бы один спецсимвол
+    """
+    digits = any(c.isdigit() for c in password)
+    lower = any(c.islower() for c in password)
+    upper = any(c.isupper() for c in password)
+    special = any(c in ".,:;!_*-+()/#¤%&" for c in password)
+    return digits and lower and upper and special
+
+def register():
+    """
+    Регистрация пользователя: имя пользователя и пароль.
+    Пользователь может создать пароль сам или сгенерировать автоматически.
+    """
+    login = input("Введите имя пользователя: ")
+    if login in logins:
+        print("Имя уже существует!")
+        return
+    choice = input("Создать пароль самостоятельно? (y/n): ")
+    if choice.lower() == "y":
+        password = input("Введите пароль: ")
+        if not check_password(password):
+            print("Пароль не соответствует требованиям!")
+            return
+    else:
+        password = generate_password()
+        print("Сгенерированный пароль:", password)
+
+    logins.append(login)
+    passwords.append(password)
+    print("Регистрация прошла успешно!")
+
+def login():
+    """
+    Авторизация пользователя по логину и паролю.
+    """
+    login_input = input("Введите имя пользователя: ")
+    password_input = input("Введите пароль: ")
+    if login_input in logins:
+        index = logins.index(login_input)
+        if passwords[index] == password_input:
+            print("Вход выполнен успешно!")
+            return True
+    print("Неверный логин или пароль!")
+    return False
+
+def change_credentials():
+    """
+    Изменение имени пользователя или пароля.
+    """
+    login_input = input("Введите текущий логин: ")
+    if login_input in logins:
+        index = logins.index(login_input)
+        choice = input("Что изменить? (login/password): ")
+        if choice.lower() == "login":
+            new_login = input("Введите новый логин: ")
+            if new_login in logins:
+                print("Имя уже занято!")
+            else:
+                logins[index] = new_login
+                print("Логин изменён!")
+        elif choice.lower() == "password":
+            new_password = input("Введите новый пароль: ")
+            if not check_password(new_password):
+                print("Пароль не соответствует требованиям!")
+            else:
+                passwords[index] = new_password
+                print("Пароль изменён!")
+    else:
+        print("Пользователь не найден!")
+
+def reset_password():
+    """
+    Сброс пароля: пользователь выбирает новое значение или генерируется автоматически.
+    """
+    login_input = input("Введите логин для сброса пароля: ")
+    if login_input in logins:
+        index = logins.index(login_input)
+        choice = input("Создать пароль самостоятельно? (y/n): ")
+        if choice.lower() == "y":
+            new_password = input("Введите новый пароль: ")
+            if not check_password(new_password):
+                print("Пароль не соответствует требованиям!")
+                return
+        else:
+            new_password = generate_password()
+            print("Сгенерированный пароль:", new_password)
+        passwords[index] = new_password
+        print("Пароль успешно изменён!")
+    else:
+        print("Пользователь не найден!")
+
+
+
+
+
+
+
+# main.py
+import MyModule
+
+while True:
+    print("\nГлавное меню:")
+    print("1 - Регистрация")
+    print("2 - Авторизация")
+    print("3 - Смена имени пользователя/пароля")
+    print("4 - Сброс пароля")
+    print("5 - Выход")
+
+    choice = input("Выберите действие: ")
+
+    if choice == "1":
+        MyModule.register()
+    elif choice == "2":
+        MyModule.login()
+    elif choice == "3":
+        MyModule.change_credentials()
+    elif choice == "4":
+        MyModule.reset_password()
+    elif choice == "5":
+        print("Выход из программы")
+        break
+    else:
+        print("Неверный выбор")
