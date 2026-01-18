@@ -1,0 +1,159 @@
+#FOR Цикл
+
+# for i in range(2,12,2):
+#     print(i)
+
+
+# while input("VIITE ")!="JA":
+#     print("RABOTAEM")
+
+
+
+# fruits = ["apple", "banana", "cherry"]
+# numbers=[1,2,3,4,5]
+# for fruit in fruits:
+#     print(fruit)
+
+
+
+
+# games=["minecraft","Word of tanks","Dota 2"]
+# numbers=[1,2,3]
+# for index,game in enumerate(games):
+#     print(index,game)
+
+
+
+
+
+# numbers=[5,10,15,20,25]
+# # total=0
+# # for number in  numbers:
+# #     total = total + number
+# #
+# # print("Сумма",total)
+
+
+
+
+
+
+# numbers=[34,12,78,43,21]
+# print(max(numbers))
+
+
+
+# numbers=[5,10,15,20,25,30]
+# total=0
+# for number in numbers:
+#     if number%2==0:#если число делиться на 2 без остатка
+#         total=total+number
+# print("Сумма чисел",total)
+
+
+
+
+
+
+
+
+
+# numbers=[2,5,9,12,7,15,18,4]
+# total=0
+# for number in numbers:
+#     if number%3==0:#если число делиться на 3 без остатка
+#         total=total+number
+# print(total)
+
+
+
+
+# numbers=[1,2,3,4,5,6,7,8,9,10]
+# new_numbers=[]
+# for number in numbers:
+#     if number % 2 == 0:
+#         new_numbers.append(number)
+# print("Четные числа:",new_numbers)
+
+
+
+
+# numbers=[2,5,9,12,7,15,18,4,21]
+# New_list=[]
+# for number in numbers:
+#     if number%3==0:
+#         New_list.append(number)
+# print("Числа кратные",New_list)
+
+
+
+
+# numbers=[5,12,8,15,3,20,7,18]
+# big_numbers=[]
+# for number in numbers:
+#     if number>10:
+#         big_numbers.append(number)
+# print("Все большие числа",big_numbers)
+
+
+# grades=[3,5,4,2,5,3,4,5,2]
+# good_grades=[]
+# for grade in grades:
+#     if grade>=4:
+#         good_grades.append(grade)
+# print("Хорошие оценки",good_grades)
+
+
+
+
+
+# grades=[3,5,4,2,5,3,4,5,2]
+# count=0
+# for grade in grades:
+#     if grade>=4:
+#         count+=1
+# print("Сумма всех положительных оценак",count)
+
+
+
+# numbers=[5,-2,10,-8,3,-1,7]
+# count=0
+# for number in numbers:
+#     if number>=0:
+#         count+=number
+# print("Сумма положительных чисел",count)
+
+
+# numbers=[34,12,78,43,21,56]
+# print(min(numbers))
+
+# numbers=[10,20,30,40,50]
+# average=sum(numbers)/len(numbers)
+# print(average)
+
+
+
+
+
+
+
+
+# numbers=[1,2,3,4,5,6,7,8,9]
+# evennumbers=[]
+# oddnumbers=[]
+# for number in numbers:
+#     if number%2==0:
+#         evennumbers.append(number)
+#     else:
+#         oddnumbers.append(number)
+# print("Evennumbers:",evennumbers,"Oddnumbers:",oddnumbers)
+
+
+# loend = [10, 20, 30, 40]
+# print(loend[1])
+
+
+# s = [12, 13, 13, 15]
+#
+# print(s.count(13))  # 2
+# print(s.index(12))
