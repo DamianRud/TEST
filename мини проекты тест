@@ -621,4 +621,55 @@ def unique_elements(seq):
 
 
 
+Длина строки
+text = "Привет мир"
+print(len(text))  # 10 символов (включая пробел)
+
+2️⃣ Доступ к символам
+text = "Привет"
+print(text[0])   # П — первый символ
+print(text[-1])  # т — последний символ
+
+3️⃣ Методы строк
+lower() и upper()
+text = "ПрИвЕт"
+print(text.lower())  # привет
+print(text.upper())  # ПРИВЕТ
+
+split() — разбить на слова
+sentence = "Это пример предложения"
+words = sentence.split()
+print(words)  # ['Это', 'пример', 'предложения']
+
+join() — собрать обратно в строку
+words = ['Это', 'пример', 'предложения']
+sentence = " ".join(words)
+print(sentence)  # "Это пример предложения"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
