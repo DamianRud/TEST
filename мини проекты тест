@@ -880,3 +880,62 @@ print(table)
 
 
 
+
+
+
+
+
+
+таблица умнажения
+n = 10
+
+for i in range(1, n + 1):
+    for j in range(1, n + 1):
+        print(str(i) + "*" + str(j) + "=" + str(i * j), end="\t")
+    print()
+
+
+
+
+
+
+
+
+ шифратор
+# Алфавит
+alphabet = list("abcdefghijklmnopqrstuvwxyz")
+
+# Функция шифрования
+def encrypt(text, shift):
+    result = ""
+    for char in text.lower():
+        try:
+            index = alphabet.index(char)          # Попытка найти букву в списке
+            new_index = (index + shift) % 26     # Сдвиг по модулю 26
+            result += alphabet[new_index]
+        except ValueError:
+            # Если символа нет в списке (например, пробел или знак), оставляем как есть
+            result += char
+    return result
+
+# Функция расшифровки
+def decrypt(text, shift):
+    return encrypt(text, -shift)
+
+# Основной код с обработкой ошибок ввода
+try:
+    text = input("Введите текст: ")
+    shift = int(input("Введите сдвиг (число): "))
+    
+    encrypted = encrypt(text, shift)
+    print("Зашифрованный текст:", encrypted)
+    
+    decrypted = decrypt(encrypted, shift)
+    print("Расшифрованный текст:", decrypted)
+
+except ValueError:
+    print("Ошибка! Сдвиг должен быть целым числом.")
+
+
+
+
