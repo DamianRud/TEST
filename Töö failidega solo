@@ -180,3 +180,83 @@ try:
 
 except FileNotFoundError:
     print("Файл 'tetx.txt' не найде
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
+# with open("text.txt","w",encoding="utf-8")as f:
+#     f.write("Привет! Я учусь работать с файлами в Python!")
+#
+# with open("text.txt","r",encoding="utf-8")as f:
+#     content=f.read()
+#     print(content)
+
+
+# # 1. Записываем файл
+# with open("text.txt", "w", encoding="utf-8") as f:
+#     f.write("Анна\nИван\nМария\nАлексей\nЕлена")
+#
+# # 2. Читаем файл
+# with open("text.txt", "r", encoding="utf-8") as file:
+#     lines = file.readlines()  # Получаем список строк
+#
+#     # 3. Выводим с номерами (ПРОСТОЙ СПОСОБ)
+#     number = 1
+#     for line in lines:
+#         clean_line = line.strip()  # Убираем \n
+#         print(str(number) + ": " + clean_line)  # Конкатенация строк
+#         number += 1  # Увеличиваем номер
+#
+#     # 4. Выводим общее количество
+#     print("Всего студентов: " + str(len(lines)))
+
+
+
+
+# with open("text.txt","w", encoding="utf-8") as f:
+#     f.write("Anna 5\n Ivan 4\n Jura 3\n Kola 4\n Henri 2\n Sabir 4\n Masha 5\n")
+#
+# with open("text.txt","r", encoding="utf-8") as f:
+#     print("Студенты с Оценками выще 4")
+#
+#     total = 0  # Сумма всех оценок
+#     count = 0  # Количество студентов
+#     found = 0  # Количество студентов с оценкой > 4
+#
+#     for line in f:
+#         line = line.strip()  # Убираем \n
+#         if line:  # Если строка не пустая
+#             # Разбиваем строку на части
+#
+#             parts = line.split()  # ["Anna", "5"]
+#             name = parts[0]  # "Anna"
+#             grade = int(parts[1])  # "5" -> 5
+#
+#             # Считаем для среднего балла
+#             total += grade
+#             count += 1
+#
+#             # Проверяем оценку
+#             if grade > 4:
+#                 print(name + ": " + str(grade))
+#                 found += 1
+#
+#                 # Выводим результаты
+#                 print("\nНайдено студентов с оценкой > 4: " + str(found))
+#
+#                 if count > 0:
+#                     average = total / count
+#                     print("Средний балл: " + str(average))
+#                 else:
+#                     print("Нет данных для расчета среднего балла")
