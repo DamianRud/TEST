@@ -260,3 +260,58 @@ except FileNotFoundError:
 #                     print("Средний балл: " + str(average))
 #                 else:
 #                     print("Нет данных для расчета среднего балла")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+с листом
+students = [
+    "Anna 5",
+    "Ivan 4",
+    "Jura 3",
+    "Kola 4",
+    "Henri 2",
+    "Sabir 4",
+    "Masha 5"
+]
+
+print("Студенты с оценками выше 4")
+
+total = 0   # сумма оценок
+count = 0   # количество студентов
+found = 0   # студентов с оценкой > 4
+
+for line in students:
+    line = line.strip()
+    if line:
+        parts = line.split()
+        name = parts[0]
+        grade = int(parts[1])
+
+        total += grade
+        count += 1
+
+        if grade > 4:
+            print(name + ": " + str(grade))
+            found += 1
+
+print("\nНайдено студентов с оценкой > 4:", found)
+
+if count > 0:
+    average = total / count
+    print("Средний балл:", average)
+else:
+    print("Нет данных для расчета среднего балла")
+
