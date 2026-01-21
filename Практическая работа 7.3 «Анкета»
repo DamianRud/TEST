@@ -1,0 +1,196 @@
+from email import message  # импортируем модуль для работы с email (не обязательно, можно убрать)
+import smtplib, ssl        # smtplib — для отправки email через SMTP, ssl — для безопасного соединения
+from email.message import EmailMessage  # класс для создания email-сообщения
+import random              # модуль для случайного выбора вопросов
+
+# -----------------------------
+# Функция для чтения вопросов и ответов из файла
+def andmete_lugemien_failideste():
+    küsimused = []  # создаём пустой список для вопросов
+    vastused = []   # создаём пустой список для ответов
+
+    try:
+        fail = open("kusimused_vastused.txt", "r", encoding="utf-8")  # открываем файл для чтения
+        for rida in fail:  # проходим по каждой строке файла
+            if ":" in rida:  # проверяем, есть ли в строке разделитель ":"
+                osad = rida.strip().split(":")  # удаляем пробелы и разделяем на вопрос и ответ
+                küsimused.append(osad[0])  # добавляем вопрос в список
+                vastused.append(osad[1])   # добавляем ответ в список
+        fail.close()  # закрываем файл
+    except:  # если файл не найден или не открыть
+        print("Viga: faili ei saa avada!")  # выводим сообщение об ошибке
+
+    return küsimused, vastused  # возвращаем два списка
+
+# -----------------------------
+# Функция для сохранения результатов в файлы
+def andmete_salvestamine_failidesse(tulemused):
+    õiged = []  # список успешных респондентов
+    valed = []  # список неуспешных респондентов
+
+    try:
+        fail = open("kõik.txt", "w", encoding="utf-8")  # создаём/перезаписываем файл со всеми респондентами
+        for r in tulemused:  # проходим по всем результатам
+            fail.write(r[0] + "," + str(r[1]) + "," + r[2] + "\n")  # записываем имя, количество правильных, email
+            if r[1] > 1:  # если правильных ответов больше 1 (успешный)
+                õiged.append(r)  # добавляем в список успешных
+            else:  # иначе
+                valed.append(r)  # добавляем в список неуспешных
+        fail.close()  # закрываем файл
+    except:  # если возникла ошибка при записи
+        print("Viga: kõik.txt faili salvestamine ebaõnnestus!")
+
+    # -----------------------------
+    # Сортировка успешных респондентов по количеству правильных ответов (по убыванию)
+    for i in range(len(õiged)):
+        for j in range(i + 1, len(õiged)):
+            if õiged[j][1] > õiged[i][1]:  # если у j больше правильных ответов чем у i
+                abi = õiged[i]  # временная переменная
+                õiged[i] = õiged[j]  # меняем местами
+                õiged[j] = abi
+
+    # -----------------------------
+    # Сортировка неуспешных респондентов по имени (по алфавиту)
+    for i in range(len(valed)):
+        for j in range(i + 1, len(valed)):
+            if valed[j][0] < valed[i][0]:  # сравниваем имена
+                abi = valed[i]  # временная переменная
+                valed[i] = valed[j]  # меняем местами
+                valed[j] = abi
+
+    # -----------------------------
+    # Сохраняем успешных респондентов в файл "õiged.txt"
+    try:
+        fail = open("õiged.txt", "w", encoding="utf-8")
+        for r in õiged:
+            fail.write(r[0] + " – " + str(r[1]) + " õigesti\n")  # имя – количество правильных
+        fail.close()
+    except:
+        print("Viga: õiged.txt faili salvestamine ebaõnnestus!")
+
+    # -----------------------------
+    # Сохраняем неуспешных респондентов в файл "valed.txt"
+    try:
+        fail = open("valed.txt", "w", encoding="utf-8")
+        for r in valed:
+            fail.write(r[0] + "\n")  # только имя
+        fail.close()
+    except:
+        print("Viga: valed.txt faili salvestamine ebaõnnestus!")
+
+# -----------------------------
+# Функция тестирования одного респондента
+def testimine(kusimused, vastused):
+    nimi = input("Sisesta nimi (Eesnimi Perenimi): ")  # ввод имени
+    email = nimi.lower().replace(" ", ".") + "@example.com"  # формируем email
+
+    indeksid = list(range(len(kusimused)))  # список индексов всех вопросов
+    random.shuffle(indeksid)  # перемешиваем индексы для случайного порядка вопросов
+
+    õiged = 0  # счётчик правильных ответов
+    N = 3  # количество вопросов на тест
+    if N > len(kusimused):  # если вопросов меньше 3
+        N = len(kusimused)  # берём все доступные
+
+    for i in range(N):  # задаём N вопросов
+        idx = indeksid[i]  # случайный индекс вопроса
+        vastus = input(nimi + ", " + kusimused[idx] + " ")  # спрашиваем у пользователя
+        if vastus.lower() == vastused[idx].lower():  # сравниваем с правильным ответом (без учёта регистра)
+            õiged += 1  # если правильно, увеличиваем счётчик
+
+    return nimi, õiged, email  # возвращаем имя, количество правильных, email
+
+# -----------------------------
+# Функция для отправки email
+def emaili_saatmine():
+    kellele = input("Sisesta kellele saata:")  # кому
+    kellelt = input("Sisesta kellelt saata")   # от кого
+    kiri = "Tere,see on testkiri!"  # текст письма
+    smtp_server = "smtp.gmail.com"  # сервер Gmail
+    port = 587  # порт
+    password = "unbv zbxf znaf zren"  # пароль (в учебных целях)
+    
+    message = EmailMessage()  # создаём объект письма
+    message.set_content(kiri)  # добавляем текст
+    message["subject"] = "Testkiri"  # тема письма
+    message["To"] = kellele  # кому
+    context = ssl.create_default_context()  # создаём контекст безопасности
+
+    try:
+        with smtplib.SMTP(smtp_server, port) as server:  # подключаемся к серверу
+            server.starttls(context=context)  # включаем безопасное соединение
+            server.login(kellelt, password)  # логинимся
+            server.send_message(message)  # отправляем письмо
+            print("Kiri saadetud edukalt!")  # сообщение об успехе
+    except Exception as e:  # если что-то пошло не так
+        print("Midagi läks valesti...", e)  # выводим ошибку
+
+# -----------------------------
+# Функция для добавления нового вопроса
+def küsimuste_lisamine():
+    k = input("Sisesta uus küsimus: ")  # вводим вопрос
+    v = input("Sisesta õige vastus: ")  # вводим правильный ответ
+
+    try:
+        fail = open("kusimused_vastused.txt", "a", encoding="utf-8")  # открываем файл для добавления
+        fail.write("\n" + k + ":" + v)  # добавляем вопрос и ответ
+        fail.close()  # закрываем файл
+        print("Küsimus lisatud!")  # сообщение об успехе
+    except:
+        print("Viga: küsimuse lisamine ebaõnnestus!")  # сообщение об ошибке
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from module import *
+
+
+tulemused = []
+
+while True:
+    print("\n1. Alusta testimist")
+    print("2. Lisa uus küsimus")
+    print("3. Saada email")
+    print("4. Välju")
+
+    valik = input("Valik: ")
+
+    if valik == "1":
+        küsimused, vastused = andmete_lugemien_failideste()
+        try:
+            M = int(input("Mitu vastajat? "))
+        except:
+            print("Viga: sisesta number!")
+            continue
+
+        for i in range(M):
+            tulemus = testimine(küsimused, vastused)
+            tulemused.append(tulemus)
+
+    elif valik == "2":
+        küsimuste_lisamine()
+
+    elif valik == "3":
+        emaili_saatmine()
+
+    elif valik == "4":
+        break
+
+if len(tulemused) > 0:
+    andmete_salvestamine_failidesse(tulemused)
+    print("\nTulemused salvestatud ja emailid saadetud!")
