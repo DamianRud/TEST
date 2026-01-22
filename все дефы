@@ -1,6 +1,6 @@
 import random
 import string
-
+р
 inimesed = ["A", "B", "C", "D", "E", "F"]
 palgad = [1000, 1200, 2500, 800, 750, 1200]
 
