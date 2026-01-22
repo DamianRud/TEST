@@ -1,0 +1,1163 @@
+крестики нолики
+def print_board(board):
+    print("  0 1 2")
+    for i in range(3):
+        row_str = str(i) + " "
+        for j in range(3):
+            row_str += board[i][j]
+            if j < 2:
+                row_str += " "
+        print(row_str)
+
+
+def check_winner(board, player):
+    # Проверка строк
+    for i in range(3):
+        if board[i][0] == player and board[i][1] == player and board[i][2] == player:
+            return True
+
+    # Проверка столбцов
+    for j in range(3):
+        if board[0][j] == player and board[1][j] == player and board[2][j] == player:
+            return True
+
+    # Проверка диагоналей
+    if board[0][0] == player and board[1][1] == player and board[2][2] == player:
+        return True
+    if board[0][2] == player and board[1][1] == player and board[2][0] == player:
+        return True
+
+    return False
+
+
+def is_board_full(board):
+    for row in board:
+        for cell in row:
+            if cell == "-":
+                return False
+    return True
+
+
+def tic_tac_toe():
+    board = [["-" for _ in range(3)] for _ in range(3)]
+    current_player = "X"
+
+    print("Добро пожаловать в крестики-нолики!")
+    print("Координаты: строка столбец (например: 0 1)")
+
+    while True:
+        print_board(board)
+        print("Ход игрока " + current_player)
+
+        try:
+            coords = input("Введите координаты: ").split()
+            if len(coords) != 2:
+                print("Введите две координаты!")
+                continue
+
+            row, col = int(coords[0]), int(coords[1])
+
+            if row < 0 or row > 2 or col < 0 or col > 2:
+                print("Координаты должны быть от 0 до 2!")
+                continue
+
+            if board[row][col] != "-":
+                print("Эта клетка уже занята!")
+                continue
+
+            board[row][col] = current_player
+
+            if check_winner(board, current_player):
+                print_board(board)
+                print("Игрок " + current_player + " победил!")
+                break
+
+            if is_board_full(board):
+                print_board(board)
+                print("Ничья!")
+                break
+
+            current_player = "O" if current_player == "X" else "X"
+
+        except ValueError:
+            print("Пожалуйста, введите числа!")
+        except IndexError:
+            print("Некорректные координаты!")
+
+
+if __name__ == "__main__":
+    tic_tac_toe()
+
+
+
+
+
+
+
+
+
+
+угадай число 
+import random
+
+def guess_number():
+    print("Добро пожаловать в игру 'Угадай число'!")
+    print("Я загадал число от 1 до 100.")
+    
+    secret_number = random.randint(1, 100)
+    attempts = 0
+    
+    while True:
+        try:
+            guess = int(input("Ваша догадка: "))
+            attempts += 1
+            
+            if guess < secret_number:
+                print("Загаданное число БОЛЬШЕ вашей догадки.")
+            elif guess > secret_number:
+                print("Загаданное число МЕНЬШЕ вашей догадки.")
+            else:
+                print("Поздравляю! Вы угадали число " + str(secret_number) + "!")
+                print("Количество попыток: " + str(attempts))
+                break
+        except ValueError:
+            print("Пожалуйста, введите целое число!")
+
+if __name__ == "__main__":
+    guess_number()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+анализатор текста 
+def count_words(text):
+    words = text.split()
+    return len(words)
+
+def count_characters(text):
+    return len(text)
+
+def count_lines(text):
+    lines = text.split("\n")
+    return len(lines)
+
+def most_common_word(text):
+    words = text.lower().split()
+    word_count = {}
+    
+    for word in words:
+        # Убираем знаки препинания
+        word = word.strip(".,!?;:-'\"")
+        if word:
+            word_count[word] = word_count.get(word, 0) + 1
+    
+    if not word_count:
+        return "Нет слов", 0
+    
+    most_common = max(word_count.items(), key=lambda x: x[1])
+    return most_common[0], most_common[1]
+
+def text_analyzer():
+    print("=== Анализатор текста ===")
+    print("1. Ввести текст с клавиатуры")
+    print("2. Загрузить текст из файла")
+    
+    choice = input("Выберите вариант: ")
+    text = ""
+    
+    if choice == "1":
+        print("Введите текст (для завершения введите пустую строку):")
+        lines = []
+        while True:
+            line = input()
+            if line == "":
+                break
+            lines.append(line)
+        text = "\n".join(lines)
+    
+    elif choice == "2":
+        filename = input("Введите имя файла: ")
+        try:
+            with open(filename, "r", encoding="utf-8") as file:
+                text = file.read()
+        except FileNotFoundError:
+            print("Файл не найден!")
+            return
+    
+    else:
+        print("Неверный выбор!")
+        return
+    
+    if not text.strip():
+        print("Текст пуст!")
+        return
+    
+    print("\n=== Результаты анализа ===")
+    print("Количество символов: " + str(count_characters(text)))
+    print("Количество слов: " + str(count_words(text)))
+    print("Количество строк: " + str(count_lines(text)))
+    
+    word, count = most_common_word(text)
+    print("Самое частое слово: '" + word + "' (встречается " + str(count) + " раз)")
+
+if __name__ == "__main__":
+    text_analyzer()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+викторина
+def load_questions(filename="question.txt"):
+    questions = []
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            lines = file.readlines()
+            for i in range(0, len(lines), 6):
+                question = lines[i].strip()
+                options = [lines[i + 1].strip(), lines[i + 2].strip(),
+                           lines[i + 3].strip(), lines[i + 4].strip()]
+                correct_answer = int(lines[i + 5].strip())
+                questions.append({
+                    "question": question,
+                    "options": options,
+                    "answer": correct_answer
+                })
+    except FileNotFoundError:
+        print("Файл с вопросами не найден! Используются стандартные вопросы.")
+        questions = [
+            {
+                "question": "Столица Франции?",
+                "options": ["Лондон", "Берлин", "Париж", "Мадрид"],
+                "answer": 3
+            },
+            {
+                "question": "2 + 2 * 2 = ?",
+                "options": ["6", "8", "4", "10"],
+                "answer": 1
+            },
+            {
+                "question": "Сколько планет в Солнечной системе?",
+                "options": ["7", "8", "9", "10"],
+                "answer": 2
+            }
+        ]
+    return questions
+
+
+def run_quiz():
+    questions = load_questions()
+    score = 0
+
+    print("=== Викторина ===")
+    print("Ответьте на " + str(len(questions)) + " вопросов.")
+
+    for i, q in enumerate(questions, 1):
+        print("\nВопрос " + str(i) + ": " + q["question"])
+
+        for j, option in enumerate(q["options"], 1):
+            print(str(j) + ") " + option)
+
+        try:
+            user_answer = int(input("Ваш ответ (1-4): "))
+            if user_answer == q["answer"]:
+                print("Правильно!")
+                score += 1
+            else:
+                print("Неправильно! Правильный ответ: " + str(q["answer"]))
+        except ValueError:
+            print("Пожалуйста, введите число от 1 до 4!")
+
+    print("\n=== Результаты ===")
+    print("Правильных ответов: " + str(score) + " из " + str(len(questions)))
+    print("Процент правильных ответов: " + str(int(score / len(questions) * 100)) + "%")
+
+
+if __name__ == "__main__":
+    run_quiz()
+
+
+
+
+
+
+
+
+
+
+
+шифор цезаря
+def caesar_cipher(text, shift, encrypt=True):
+    result = ""
+
+    for char in text:
+        if char.isalpha():
+            # Определяем базовый код для буквы (A/a)
+            if char.isupper():
+                base = ord('A')
+            else:
+                base = ord('a')
+
+            # Сдвигаем символ
+            if encrypt:
+                shifted = (ord(char) - base + shift) % 26 + base
+            else:
+                shifted = (ord(char) - base - shift) % 26 + base
+
+            result += chr(shifted)
+        else:
+            # Не-буквы оставляем как есть
+            result += char
+
+    return result
+
+
+def main():
+    print("=== Шифр Цезаря ===")
+    print("1. Зашифровать текст")
+    print("2. Расшифровать текст")
+
+    choice = input("Выберите действие: ")
+
+    if choice not in ["1", "2"]:
+        print("Неверный выбор!")
+        return
+
+    text = input("Введите текст: ")
+
+    try:
+        shift = int(input("Введите ключ (сдвиг): "))
+        if shift < 0:
+            print("Ключ должен быть положительным!")
+            return
+    except ValueError:
+        print("Ключ должен быть числом!")
+        return
+
+    if choice == "1":
+        encrypted = caesar_cipher(text, shift, encrypt=True)
+        print("Зашифрованный текст: " + encrypted)
+    else:
+        decrypted = caesar_cipher(text, shift, encrypt=False)
+        print("Расшифрованный текст: " + decrypted)
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+телефоная книга
+def load_contacts(filename="contacts.txt"):
+    contacts = {}
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            for line in file:
+                if ":" in line:
+                    name, phone = line.strip().split(":", 1)
+                    contacts[name] = phone
+    except FileNotFoundError:
+        print("Файл с контактами не найден. Создана новая книга.")
+    return contacts
+
+
+def save_contacts(contacts, filename="contacts.txt"):
+    with open(filename, "w", encoding="utf-8") as file:
+        for name, phone in contacts.items():
+            file.write(name + ":" + phone + "\n")
+
+
+def print_contacts(contacts):
+    if not contacts:
+        print("Телефонная книга пуста.")
+        return
+
+    print("\n=== Телефонная книга ===")
+    for i, (name, phone) in enumerate(contacts.items(), 1):
+        print(str(i) + ". " + name + ": " + phone)
+
+
+def phone_book():
+    contacts = load_contacts()
+
+    while True:
+        print("\n=== Меню ===")
+        print("1. Показать все контакты")
+        print("2. Добавить контакт")
+        print("3. Найти контакт")
+        print("4. Удалить контакт")
+        print("5. Выйти")
+
+        choice = input("Выберите действие: ")
+
+        if choice == "1":
+            print_contacts(contacts)
+
+        elif choice == "2":
+            name = input("Введите имя: ").strip()
+            if not name:
+                print("Имя не может быть пустым!")
+                continue
+
+            if name in contacts:
+                print("Контакт с таким именем уже существует!")
+                continue
+
+            phone = input("Введите номер телефона: ").strip()
+            if not phone:
+                print("Номер телефона не может быть пустым!")
+                continue
+
+            contacts[name] = phone
+            save_contacts(contacts)
+            print("Контакт '" + name + "' добавлен!")
+
+        elif choice == "3":
+            search = input("Введите имя для поиска: ").strip()
+            found = False
+
+            for name, phone in contacts.items():
+                if search.lower() in name.lower():
+                    print("Найден: " + name + ": " + phone)
+                    found = True
+
+            if not found:
+                print("Контакты не найдены.")
+
+        elif choice == "4":
+            name = input("Введите имя контакта для удаления: ").strip()
+            if name in contacts:
+                del contacts[name]
+                save_contacts(contacts)
+                print("Контакт '" + name + "' удален!")
+            else:
+                print("Контакт не найден!")
+
+        elif choice == "5":
+            print("До свидания!")
+            break
+
+        else:
+            print("Неверный выбор!")
+
+
+if __name__ == "__main__":
+    phone_book()
+
+
+
+
+
+
+
+
+
+
+конвертатор валют
+def currency_converter():
+    # Курсы валют (к рублю)
+    rates = {
+        "USD": 0.011,
+        "EUR": 0.010,
+        "GBP": 0.0085,
+        "CNY": 0.079,
+        "JPY": 1.63
+    }
+    
+    print("=== Конвертер валют ===")
+    print("Доступные валюты: RUB, USD, EUR, GBP, CNY, JPY")
+    
+    while True:
+        print("\n1. Конвертировать")
+        print("2. Показать курсы")
+        print("3. Выйти")
+        
+        choice = input("Выберите действие: ")
+        
+        if choice == "1":
+            amount = input("Введите сумму: ")
+            try:
+                amount = float(amount)
+                from_curr = input("Из валюты (RUB, USD, EUR...): ").upper()
+                to_curr = input("В валюту (RUB, USD, EUR...): ").upper()
+                
+                if from_curr == to_curr:
+                    print("Валюты одинаковые!")
+                    continue
+                
+                # Конвертация через рубль как базовую валюту
+                if from_curr == "RUB":
+                    if to_curr in rates:
+                        result = amount * rates[to_curr]
+                    else:
+                        print("Неизвестная валюта!")
+                        continue
+                elif to_curr == "RUB":
+                    if from_curr in rates:
+                        result = amount / rates[from_curr]
+                    else:
+                        print("Неизвестная валюта!")
+                        continue
+                else:
+                    # Конвертация между двумя валютами через RUB
+                    if from_curr in rates and to_curr in rates:
+                        result = (amount / rates[from_curr]) * rates[to_curr]
+                    else:
+                        print("Неизвестная валюта!")
+                        continue
+                
+                print(str(amount) + " " + from_curr + " = " + str(round(result, 2)) + " " + to_curr)
+                
+            except ValueError:
+                print("Сумма должна быть числом!")
+        
+        elif choice == "2":
+            print("\nКурсы к рублю:")
+            for currency, rate in rates.items():
+                print("1 " + currency + " = " + str(round(1/rate, 2)) + " RUB")
+        
+        elif choice == "3":
+            print("До свидания!")
+            break
+        
+        else:
+            print("Неверный выбор!")
+
+if __name__ == "__main__":
+    currency_converter()
+
+
+
+
+
+
+
+
+генератор паролей
+
+
+
+
+import random
+import string
+
+def generate_password(length=8, use_digits=True, use_special=True):
+    characters = string.ascii_letters  # Буквы
+    
+    if use_digits:
+        characters += string.digits  # Цифры
+    
+    if use_special:
+        characters += "!@#$%^&*()_+-=[]{}|;:,.<>?"  # Спецсимволы
+    
+    if not characters:
+        return "Невозможно сгенерировать пароль"
+    
+    password = ""
+    for _ in range(length):
+        password += random.choice(characters)
+    
+    return password
+
+def password_generator():
+    print("=== Генератор паролей ===")
+    
+    while True:
+        print("\n1. Сгенерировать пароль")
+        print("2. Сгенерировать несколько паролей")
+        print("3. Выйти")
+        
+        choice = input("Выберите действие: ")
+        
+        if choice == "1":
+            try:
+                length = int(input("Длина пароля (8-32): "))
+                if length < 8 or length > 32:
+                    print("Длина должна быть от 8 до 32 символов!")
+                    continue
+                
+                use_digits = input("Использовать цифры? (y/n): ").lower() == "y"
+                use_special = input("Использовать спецсимволы? (y/n): ").lower() == "y"
+                
+                password = generate_password(length, use_digits, use_special)
+                print("Сгенерированный пароль: " + password)
+                
+            except ValueError:
+                print("Длина должна быть числом!")
+        
+        elif choice == "2":
+            try:
+                count = int(input("Количество паролей: "))
+                length = int(input("Длина паролей (8-32): "))
+                
+                if count < 1 or count > 20:
+                    print("Количество должно быть от 1 до 20!")
+                    continue
+                
+                if length < 8 or length > 32:
+                    print("Длина должна быть от 8 до 32 символов!")
+                    continue
+                
+                print("\nСгенерированные пароли:")
+                for i in range(count):
+                    password = generate_password(length, True, True)
+                    print(str(i+1) + ". " + password)
+                    
+            except ValueError:
+                print("Введите числа!")
+        
+        elif choice == "3":
+            print("До свидания!")
+            break
+        
+        else:
+            print("Неверный выбор!")
+
+if __name__ == "__main__":
+    password_generator()
+
+
+
+
+
+
+
+
+игра висилица
+
+
+
+
+import random
+
+def display_hangman(tries):
+    stages = [
+        """
+           ------
+           |    |
+           |    O
+           |   /|\\
+           |   / \\
+           |
+        """,
+        """
+           ------
+           |    |
+           |    O
+           |   /|\\
+           |   /
+           |
+        """,
+        """
+           ------
+           |    |
+           |    O
+           |   /|\\
+           |
+           |
+        """,
+        """
+           ------
+           |    |
+           |    O
+           |   /|
+           |
+           |
+        """,
+        """
+           ------
+           |    |
+           |    O
+           |    |
+           |
+           |
+        """,
+        """
+           ------
+           |    |
+           |    O
+           |
+           |
+           |
+        """,
+        """
+           ------
+           |    |
+           |
+           |
+           |
+           |
+        """
+    ]
+    return stages[tries]
+
+def hangman():
+    words = ["питон", "программа", "компьютер", "алгоритм", 
+             "функция", "переменная", "список", "словарь"]
+    
+    word = random.choice(words)
+    word_completion = "_" * len(word)
+    guessed = False
+    guessed_letters = []
+    guessed_words = []
+    tries = 6
+    
+    print("Давайте играть в виселицу!")
+    print(display_hangman(tries))
+    print("Слово: " + word_completion)
+    
+    while not guessed and tries > 0:
+        guess = input("Введите букву или слово: ").lower()
+        
+        if len(guess) == 1 and guess.isalpha():
+            if guess in guessed_letters:
+                print("Вы уже называли букву " + guess)
+            elif guess not in word:
+                print("Буквы " + guess + " нет в слове.")
+                tries -= 1
+                guessed_letters.append(guess)
+            else:
+                print("Отлично! Буква " + guess + " есть в слове.")
+                guessed_letters.append(guess)
+                
+                # Обновляем отображение слова
+                word_as_list = list(word_completion)
+                indices = [i for i, letter in enumerate(word) if letter == guess]
+                for index in indices:
+                    word_as_list[index] = guess
+                word_completion = "".join(word_as_list)
+                
+                if "_" not in word_completion:
+                    guessed = True
+        
+        elif len(guess) == len(word) and guess.isalpha():
+            if guess in guessed_words:
+                print("Вы уже называли слово " + guess)
+            elif guess != word:
+                print("Слово " + guess + " неверное.")
+                tries -= 1
+                guessed_words.append(guess)
+            else:
+                guessed = True
+                word_completion = word
+        
+        else:
+            print("Неверный ввод.")
+        
+        print(display_hangman(tries))
+        print("Слово: " + word_completion)
+        print("Использованные буквы: " + ", ".join(guessed_letters))
+    
+    if guessed:
+        print("Поздравляем! Вы угадали слово " + word + "!")
+    else:
+        print("Вы проиграли! Загаданное слово было: " + word)
+
+if __name__ == "__main__":
+    hangman()
+
+
+
+
+
+
+
+
+
+
+
+
+
+система бронирования билета
+
+def load_seats(filename="seats.txt"):
+    seats = {}
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            for line in file:
+                if ":" in line:
+                    seat, status = line.strip().split(":")
+                    seats[seat] = status
+    except FileNotFoundError:
+        # Создаем начальные места (ряды 1-5, места A-D)
+        for row in range(1, 6):
+            for seat_letter in ["A", "B", "C", "D"]:
+                seat = str(row) + seat_letter
+                seats[seat] = "свободно"
+        save_seats(seats)
+    return seats
+
+def save_seats(seats, filename="seats.txt"):
+    with open(filename, "w", encoding="utf-8") as file:
+        for seat, status in seats.items():
+            file.write(seat + ":" + status + "\n")
+
+def display_seats(seats):
+    print("\n=== Схема зала ===")
+    print("  A B C D")
+    
+    for row in range(1, 6):
+        row_str = str(row) + " "
+        for seat_letter in ["A", "B", "C", "D"]:
+            seat = str(row) + seat_letter
+            if seats.get(seat) == "занято":
+                row_str += "X "
+            else:
+                row_str += seat_letter + " "
+        print(row_str)
+    
+    print("\nОбозначения:")
+    print("A, B, C, D - свободные места")
+    print("X - занятые места")
+
+def booking_system():
+    seats = load_seats()
+    
+    print("=== Система бронирования билетов ===")
+    
+    while True:
+        print("\n1. Показать схему зала")
+        print("2. Забронировать место")
+        print("3. Отменить бронь")
+        print("4. Показать свободные места")
+        print("5. Выйти")
+        
+        choice = input("Выберите действие: ")
+        
+        if choice == "1":
+            display_seats(seats)
+        
+        elif choice == "2":
+            display_seats(seats)
+            seat = input("\nВведите номер места (например, 1A): ").upper()
+            
+            if seat not in seats:
+                print("Неверный номер места!")
+                continue
+            
+            if seats[seat] == "занято":
+                print("Место " + seat + " уже занято!")
+            else:
+                seats[seat] = "занято"
+                save_seats(seats)
+                print("Место " + seat + " успешно забронировано!")
+        
+        elif choice == "3":
+            display_seats(seats)
+            seat = input("\nВведите номер места для отмены брони: ").upper()
+            
+            if seat not in seats:
+                print("Неверный номер места!")
+                continue
+            
+            if seats[seat] == "свободно":
+                print("Место " + seat + " и так свободно!")
+            else:
+                seats[seat] = "свободно"
+                save_seats(seats)
+                print("Бронь места " + seat + " отменена!")
+        
+        elif choice == "4":
+            print("\nСвободные места:")
+            free_seats = [seat for seat, status in seats.items() if status == "свободно"]
+            if free_seats:
+                print(", ".join(sorted(free_seats)))
+                print("Всего свободных мест: " + str(len(free_seats)))
+            else:
+                print("Нет свободных мест!")
+        
+        elif choice == "5":
+            print("До свидания!")
+            break
+        
+        else:
+            print("Неверный выбор!")
+
+if __name__ == "__main__":
+    booking_system()
+
+
+
+
+
+
+
+
+
+
+
+
+
+симулятор банкомата
+
+
+
+
+def load_accounts(filename="accounts.txt"):
+    accounts = {}
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            for line in file:
+                if ":" in line:
+                    parts = line.strip().split(":")
+                    if len(parts) >= 2:
+                        account_num = parts[0]
+                        balance = float(parts[1])
+                        accounts[account_num] = balance
+    except FileNotFoundError:
+        # Создаем тестовые счета
+        accounts = {"123456": 1000.0, "654321": 500.0}
+        save_accounts(accounts)
+    return accounts
+
+def save_accounts(accounts, filename="accounts.txt"):
+    with open(filename, "w", encoding="utf-8") as file:
+        for account_num, balance in accounts.items():
+            file.write(account_num + ":" + str(balance) + "\n")
+
+def atm_simulator():
+    accounts = load_accounts()
+    current_account = None
+    
+    print("=== Банкомат ===")
+    
+    while True:
+        if current_account is None:
+            print("\n1. Войти в систему")
+            print("2. Выйти")
+            
+            choice = input("Выберите действие: ")
+            
+            if choice == "1":
+                account_num = input("Введите номер счета: ")
+                if account_num in accounts:
+                    current_account = account_num
+                    print("Добро пожаловать! Счет: " + current_account)
+                else:
+                    print("Счет не найден!")
+            
+            elif choice == "2":
+                print("До свидания!")
+                break
+            
+            else:
+                print("Неверный выбор!")
+        
+        else:
+            print("\nТекущий счет: " + current_account)
+            print("Баланс: " + str(accounts[current_account]))
+            print("\n1. Показать баланс")
+            print("2. Снять наличные")
+            print("3. Пополнить счет")
+            print("4. Выйти из системы")
+            
+            choice = input("Выберите действие: ")
+            
+            if choice == "1":
+                print("Баланс счета " + current_account + ": " + str(accounts[current_account]))
+            
+            elif choice == "2":
+                try:
+                    amount = float(input("Введите сумму для снятия: "))
+                    if amount <= 0:
+                        print("Сумма должна быть положительной!")
+                    elif amount > accounts[current_account]:
+                        print("Недостаточно средств на счете!")
+                    else:
+                        accounts[current_account] -= amount
+                        save_accounts(accounts)
+                        print("Успешно! Снято: " + str(amount))
+                        print("Новый баланс: " + str(accounts[current_account]))
+                except ValueError:
+                    print("Введите число!")
+            
+            elif choice == "3":
+                try:
+                    amount = float(input("Введите сумму для пополнения: "))
+                    if amount <= 0:
+                        print("Сумма должна быть положительной!")
+                    else:
+                        accounts[current_account] += amount
+                        save_accounts(accounts)
+                        print("Успешно! Пополнено: " + str(amount))
+                        print("Новый баланс: " + str(accounts[current_account]))
+                except ValueError:
+                    print("Введите число!")
+            
+            elif choice == "4":
+                print("Выход из системы...")
+                current_account = None
+            
+            else:
+                print("Неверный выбор!")
+
+if __name__ == "__main__":
+    atm_simulator()
+
+
+
+
+
+
+
+
+
+
+система оценивания студента
+
+
+
+
+def load_students(filename="students.txt"):
+    students = {}
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            for line in file:
+                if ":" in line:
+                    name, grades_str = line.strip().split(":", 1)
+                    grades = []
+                    if grades_str:
+                        grades = [float(g) for g in grades_str.split(",")]
+                    students[name] = grades
+    except FileNotFoundError:
+        print("Файл не найден. Создана новая база.")
+    return students
+
+def save_students(students, filename="students.txt"):
+    with open(filename, "w", encoding="utf-8") as file:
+        for name, grades in students.items():
+            grades_str = ",".join(str(g) for g in grades)
+            file.write(name + ":" + grades_str + "\n")
+
+def calculate_average(grades):
+    if not grades:
+        return 0
+    return sum(grades) / len(grades)
+
+def grade_system():
+    students = load_students()
+    
+    print("=== Система учета оценок ===")
+    
+    while True:
+        print("\n1. Добавить студента")
+        print("2. Добавить оценку")
+        print("3. Показать всех студентов")
+        print("4. Показать успеваемость")
+        print("5. Найти студента")
+        print("6. Выйти")
+        
+        choice = input("Выберите действие: ")
+        
+        if choice == "1":
+            name = input("Введите имя студента: ").strip()
+            if not name:
+                print("Имя не может быть пустым!")
+                continue
+            
+            if name in students:
+                print("Студент " + name + " уже существует!")
+                continue
+            
+            students[name] = []
+            save_students(students)
+            print("Студент " + name + " добавлен!")
+        
+        elif choice == "2":
+            name = input("Введите имя студента: ").strip()
+            if name not in students:
+                print("Студент не найден!")
+                continue
+            
+            try:
+                grade = float(input("Введите оценку (2-5): "))
+                if grade < 2 or grade > 5:
+                    print("Оценка должна быть от 2 до 5!")
+                    continue
+                
+                students[name].append(grade)
+                save_students(students)
+                print("Оценка добавлена!")
+            
+            except ValueError:
+                print("Введите число!")
+        
+        elif choice == "3":
+            if not students:
+                print("Нет студентов в базе!")
+                continue
+            
+            print("\nСписок студентов:")
+            for i, name in enumerate(sorted(students.keys()), 1):
+                avg = calculate_average(students[name])
+                print(str(i) + ". " + name + " (оценок: " + str(len(students[name])) + 
+                      ", средний балл: " + str(round(avg, 2)) + ")")
+        
+        elif choice == "4":
+            print("\nУспеваемость студентов:")
+            for name in sorted(students.keys()):
+                grades = students[name]
+                if grades:
+                    avg = calculate_average(grades)
+                    print(name + ": " + ", ".join(str(g) for g in grades) + 
+                          " | Средний: " + str(round(avg, 2)))
+                else:
+                    print(name + ": нет оценок")
+        
+        elif choice == "5":
+            search = input("Введите имя для поиска: ").strip().lower()
+            found = False
+            
+            for name, grades in students.items():
+                if search in name.lower():
+                    print("\nНайден: " + name)
+                    if grades:
+                        print("Оценки: " + ", ".join(str(g) for g in grades))
+                        print("Средний балл: " + str(round(calculate_average(grades), 2)))
+                    else:
+                        print("Нет оценок")
+                    found = True
+            
+            if not found:
+                print("Студент не найден!")
+        
+        elif choice == "6":
+            print("До свидания!")
+            break
+        
+        else:
+            print("Неверный выбор!")
+
+if __name__ == "__main__":
+    grade_system()
+
+
