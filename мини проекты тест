@@ -990,7 +990,17 @@ except ValueError:
 
 
 
+календарь
+import calendar
 
+# Ввод года и месяца
+year = int(input("Введите год: "))
+month = int(input("Введите месяц (1-12): "))
+
+# Создаем календарь
+cal = calendar.month(year, month)
+print("\nВот ваш календарь:")
+print(cal)
 
 
 
