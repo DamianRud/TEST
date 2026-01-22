@@ -521,6 +521,8 @@ def is_year_leap(year):
     if year % 4 == 0:
         return True
     return False
+user=int(input("Sisesta aasta:"))
+print(is_year_leap(user))
 
 (3) Квадрат (периметр, площадь, диагональ)
 import math
@@ -581,6 +583,13 @@ def date(day, month, year):
         return False
 
     return True
+
+day = int(input("Введите день: "))
+month = int(input("Введите месяц: "))
+year = int(input("Введите год: "))
+
+print(date(day, month, year))
+
 
 (8) XOR-шифрование
 def XOR_cipher(text, key):
@@ -935,6 +944,53 @@ try:
 
 except ValueError:
     print("Ошибка! Сдвиг должен быть целым числом.")
+
+
+
+
+
+
+позитивные отрецательные и нули
+
+try:
+    n = int(input("Введите количество чисел: "))
+
+    positive = 0
+    negative = 0
+    zeros = 0
+
+    for i in range(n):
+        try:
+            number = int(input("Введите число: "))
+
+            if number > 0:
+                positive += 1
+            elif number < 0:
+                negative += 1
+            else:
+                zeros += 1
+
+        except ValueError:
+            print("Ошибка! Нужно ввести целое число.")
+            i -= 1
+
+    print("Количество положительных чисел:", positive)
+    print("Количество отрицательных чисел:", negative)
+    print("Количество нулей:", zeros)
+
+except ValueError:
+    print("Ошибка! Количество чисел должно быть целым.")
+
+
+
+
+
+
+
+
+
+
+
 
 
 
