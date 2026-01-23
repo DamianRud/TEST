@@ -1,0 +1,130 @@
+import math
+
+def main():
+    while True:
+        print("\nМеню")
+        print("1. Ввести текст и сохранить в .txt файл")
+        print("2. Калькулятор")
+        print("3. Квадрат")
+        print("0. Выход")
+
+        try:
+            choice = int(input("Выбери номер: "))
+        except ValueError:
+            print("Нужно вводить число!")
+            continue
+
+        if choice == 1:
+            txt_file()
+        elif choice == 2:
+            calculator()
+        elif choice == 3:
+            square()
+        elif choice == 0:
+            print("Выход...")
+            break
+        else:
+            print("Неверный выбор!")
+
+# ===========================
+def txt_file():
+    text = input("Введи текст: ")
+    file_path = "Fail.txt"
+    try:
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(text)
+        print(f"Текст сохранён в {file_path}")
+    except Exception as e:
+        print("Ошибка при сохранении файла:", e)
+
+# ===========================
+def calculator():
+    print("\nВыберите операцию:")
+    print("1. Сложение")
+    print("2. Вычитание")
+    print("3. Умножение")
+    print("4. Деление")
+    print("5. Квадратное уравнение")
+
+    valik = input("Номер операции: ")
+
+    if valik == "1":
+        addition()
+    elif valik == "2":
+        subtraction()
+    elif valik == "3":
+        multiplication()
+    elif valik == "4":
+        division()
+    elif valik == "5":
+        quadratic()
+    else:
+        print("Неверный выбор!")
+
+def addition():
+    try:
+        a = float(input("Число 1: "))
+        b = float(input("Число 2: "))
+        print("Результат:", a + b)
+    except ValueError:
+        print("Ошибка: нужно вводить числа")
+
+def subtraction():
+    try:
+        a = float(input("Число 1: "))
+        b = float(input("Число 2: "))
+        print("Результат:", a - b)
+    except ValueError:
+        print("Ошибка: нужно вводить числа")
+
+def multiplication():
+    try:
+        a = float(input("Число 1: "))
+        b = float(input("Число 2: "))
+        print("Результат:", a * b)
+    except ValueError:
+        print("Ошибка: нужно вводить числа")
+
+def division():
+    try:
+        a = float(input("Число 1: "))
+        b = float(input("Число 2: "))
+        if b != 0:
+            print("Результат:", a / b)
+        else:
+            print("Ошибка: деление на ноль")
+    except ValueError:
+        print("Ошибка: нужно вводить числа")
+
+def quadratic():
+    try:
+        a = float(input("a = "))
+        b = float(input("b = "))
+        c = float(input("c = "))
+        D = b**2 - 4*a*c
+        if D > 0:
+            x1 = (-b + math.sqrt(D)) / (2*a)
+            x2 = (-b - math.sqrt(D)) / (2*a)
+            print(f"Два решения: x1 = {x1}, x2 = {x2}")
+        elif D == 0:
+            x = -b / (2*a)
+            print(f"Один корень: x = {x}")
+        else:
+            print("Нет решений")
+    except ValueError:
+        print("Ошибка: нужно вводить числа")
+    except ZeroDivisionError:
+        print("Ошибка: a не может быть равно 0")
+
+# ===========================
+def square():
+    try:
+        size = int(input("Введите размер квадрата: "))
+        for i in range(size):
+            print("* " * size)
+    except ValueError:
+        print("Ошибка: нужно вводить целое число")
+
+# ===========================
+if __name__ == "__main__":
+    main()
